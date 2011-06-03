@@ -115,14 +115,21 @@ it will look something like:
 Copy this as you need to paste it into your [GitHub SSH settings](https://github.com/account/ssh)
 
 Now back in the terminal:
-`mkdir grpwnd
-  cd grpwnd
-  git init
-  touch README
-  git add README
-  git commit -m 'first commit'
-  git remote add origin git@github.com:grpwnd/grpwnd.git
-  git push -u origin master`
+`mkdir grpwnd`
+
+`cd grpwnd`
+
+`git init`
+
+`touch README`
+
+`git add README`
+
+`git commit -m 'first commit'`
+
+`git remote add origin git@github.com:grpwnd/grpwnd.git`
+
+`git push -u origin master`
 
 Existing Git Repo?
   'cd existing_git_repo
