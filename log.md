@@ -6,6 +6,8 @@ Its structured chronologically so you can follow at home :-)
 
 If you don't know what you are doing '*under the hood*' of a PC or you have never written any code, this will not be the best place to learn... Not that the log is incomplete, just because I do not recommend trying to *fly* before you can crawl! Go read up on [JavaScript](http://en.wikipedia.org/wiki/JavaScript), [HTML](http://en.wikipedia.org/wiki/HTML) [Servers](http://en.wikipedia.org/wiki/Web_server) and [How Web Servers Work](http://www.howstuffworks.com/web-server.htm/printable) before attempting any of the *fancy* **NodeJS** stuff! NodeJS is the ClusterBomb of Programming... Seriously kids, don't play with weapons! 
 
+##Crack On :-)
+There are plenty of excellent NodeJS resources
 
 
 
@@ -71,7 +73,7 @@ and paste:
 	http.createServer(function (req, res) {
 	  res.writeHead(200, {'Content-Type': 'text/plain'});
 	  res.end('Hello World\n');
-	}).listen(80, "127.0.0.1");
+	}).listen(80);
 	console.log('Server running at http://127.0.0.1:80/');
 
 Save.
@@ -83,7 +85,7 @@ In the terminal run:
 
 	$ node hello.js
 
-Open a WebBrowser and visit the page: [http://127.0.0.1:1337/](http://127.0.0.1/)
+Open a WebBrowser and visit the page: [http://127.0.0.1/](http://127.0.0.1/)
 
 To escape the Node server in terminal type:
 **CTRL + C**
