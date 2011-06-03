@@ -17,15 +17,15 @@ If you don't know what you are doing '*under the hood*' of a PC or you have neve
 
 To replicate you will need:
 
-+A modern computer (pc or mac) that will run linux (almost all will!) prefferably with a CD-Writer so you can burn a Linux OS. 
++ A modern computer (pc or mac) that will run linux (almost all will!) prefferably with a CD-Writer so you can burn a Linux OS. 
 
-+512MB+ RAM pref 1GB (I run my Linux Guest OS with 2GB...) [YMMV](http://en.wiktionary.org/wiki/your_mileage_may_vary)
++ 512MB+ RAM pref 1GB (I run my Linux Guest OS with 2GB...) [YMMV](http://en.wiktionary.org/wiki/your_mileage_may_vary)
 
-+Download a copy of the latest [Debian](http://debian.org) OS (you will need a writeable CD to burn the OS to) **or** you can order a CD from [ubuntu](http://www.ubuntu.com/download/ubuntu/cds) (costs may apply)
++ Download a copy of the latest [Debian](http://debian.org) OS (you will need a writeable CD to burn the OS to) **or** you can order a CD from [ubuntu](http://www.ubuntu.com/download/ubuntu/cds) (costs may apply)
 
-+If you don't have a CD-Writer or Blank CDs to hand :-( you can try [Pen Drive Linux](http://www.pendrivelinux.com/) on a USB Stick!
++ If you don't have a CD-Writer or Blank CDs to hand :-( you can try [Pen Drive Linux](http://www.pendrivelinux.com/) on a USB Stick!
 
-+Aprox 2hours of time to play with :-)
++ Aprox 2hours of time to play with :-)
 
 Note: if the PC you are working with is not '*spare*' or you still need the windows/mac system that is on it, you will also need to [download](http://www.virtualbox.org/wiki/Downloads) and install [VirtualBox](http://en.wikipedia.org/wiki/VirtualBox) to allow you to run Linux as a ["Guest OS"](http://www.virtualbox.org/wiki/Guest_OSes) on your PC. 
 
@@ -55,8 +55,9 @@ Clone a copy of Node from GitHub:
 	$ make install
 
 if the message you get looks like:
->> Waf: Leaving directory `/home/user/node/build'
->> 'install' finished successfully (8m24.781s)
+
+	>> Waf: Leaving directory `/home/user/node/build'
+	>> 'install' finished successfully (8m24.781s)
 
 You are ready to *Node*!
 If you got any error messages please go to: [Node install wiki](https://github.com/joyent/node/wiki/Installation) for troubleshooting.
@@ -120,11 +121,14 @@ Now run the initial commands in terminal:
 	$ git config --global user.email grpwnd@gmail.com
 
 **IF** you don't alreay have an SSH Public/Private key you will need to create one:
-` ssh-keygen -t dsa`
+
+	$ ssh-keygen -t dsa
+
 This creates a pair of keys in the directory: /home/user/.ssh/
 to view the files:
-`cd /home/user/.ssh/`
-`ls`
+
+	$ cd /home/user/.ssh/
+	$ ls
 
 open/view the id_dsa.pub file with:
 `cat id_dsa.pub
