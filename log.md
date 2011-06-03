@@ -17,15 +17,15 @@ If you don't know what you are doing '*under the hood*' of a PC or you have neve
 
 To replicate you will need:
 
-- A modern computer (pc or mac) that will run linux (almost all will!) prefferably with a CD-Writer so you can burn a Linux OS. 
++A modern computer (pc or mac) that will run linux (almost all will!) prefferably with a CD-Writer so you can burn a Linux OS. 
 
-- 512MB+ RAM pref 1GB (I run my Linux Guest OS with 2GB...) [YMMV](http://en.wiktionary.org/wiki/your_mileage_may_vary)
++512MB+ RAM pref 1GB (I run my Linux Guest OS with 2GB...) [YMMV](http://en.wiktionary.org/wiki/your_mileage_may_vary)
 
-- Download a copy of the latest [Debian](http://debian.org) OS (you will need a writeable CD to burn the OS to) **or** you can order a CD from [ubuntu](http://www.ubuntu.com/download/ubuntu/cds) (costs may apply)
++Download a copy of the latest [Debian](http://debian.org) OS (you will need a writeable CD to burn the OS to) **or** you can order a CD from [ubuntu](http://www.ubuntu.com/download/ubuntu/cds) (costs may apply)
 
-- If you don't have a CD-Writer or Blank CDs to hand :-( you can try [Pen Drive Linux](http://www.pendrivelinux.com/) on a USB Stick!
++If you don't have a CD-Writer or Blank CDs to hand :-( you can try [Pen Drive Linux](http://www.pendrivelinux.com/) on a USB Stick!
 
-- Aprox 2hours of time to play with :-)
++Aprox 2hours of time to play with :-)
 
 Note: if the PC you are working with is not '*spare*' or you still need the windows/mac system that is on it, you will also need to [download](http://www.virtualbox.org/wiki/Downloads) and install [VirtualBox](http://en.wikipedia.org/wiki/VirtualBox) to allow you to run Linux as a ["Guest OS"](http://www.virtualbox.org/wiki/Guest_OSes) on your PC. 
 
@@ -41,7 +41,7 @@ Right, first you need to install Debian Linux on your system either natively/dua
 
 Once you have a working install of Linux open the *Terminal*  and run:
 
-`sudo apt-get install g++ curl libssl-dev apache2-utils git-core`
+	$ sudo apt-get install g++ curl libssl-dev apache2-utils git-core
 
 That will install everything you need to build & run a basic NodeJS app.
 
@@ -49,10 +49,10 @@ That will install everything you need to build & run a basic NodeJS app.
 ![node logo](http://nodejs.org/logo.png "Node Logo ")
 
 Clone a copy of Node from GitHub:
-`git clone git://github.com/joyent/node.git`
-`cd node`
-`./configure`
-`make install`
+	$ git clone git://github.com/joyent/node.git
+	$ cd node
+	$ ./configure
+	$ make install
 
 if the message you get looks like:
 >> Waf: Leaving directory `/home/user/node/build'
@@ -76,11 +76,11 @@ and paste:
 Save.
 In the terminal run:
 
-	su -
+	$ su -
 
 ( we want to test if we can run node as root to get access to port 80 )
 
-	node hello.js
+	$ node hello.js
 
 Open a WebBrowser and visit the page: [http://127.0.0.1:1337/](http://127.0.0.1/)
 
@@ -90,7 +90,8 @@ To escape the Node server in terminal type:
 ####NPM (Node Package Manager)
 
 Run this command in your terminal:
-`curl http://npmjs.org/install.sh | sh`
+
+	$ curl http://npmjs.org/install.sh | sh
 
 Success message:
 >> /usr/local/bin/npm -> /usr/local/lib/node_modules/npm/bin/npm.js npm@1.0.9 /usr/local/lib/node_modules/npm 
@@ -103,9 +104,9 @@ else troubleshoot at: [https://github.com/isaacs/npm](https://github.com/isaacs/
 
 ####NPM Packages
 
-'npm install mongoose express-mongoose connect-mongodb jade less expresso forever forms express-resource'
-
-`npm install nodemon`
+	$ npm install mongoose express-mongoose connect-mongodb jade less expresso forever forms express-resource
+	$ su -
+	$ npm install nodemon -g
 
 ####Git Setup
 
@@ -115,8 +116,8 @@ Now run the initial commands in terminal:
 
 *Replace with your own details*
 
-`git config --global user.name "Alan Touring"`
-`git config --global user.email grpwnd@gmail.com`
+	$ git config --global user.name "Alan Touring"
+	$ git config --global user.email grpwnd@gmail.com
 
 **IF** you don't alreay have an SSH Public/Private key you will need to create one:
 ` ssh-keygen -t dsa`
