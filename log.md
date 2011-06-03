@@ -35,8 +35,10 @@ Right, first you need to install Debian Linux on your system either natively/dua
 3. Open VirtuaBox and create a new VM. Its a simple wizard... (Sorry to gloss over installing linux but its quite well documented online.) See: [http://www.wikihow.com/Install-Ubuntu-on-VirtualBox](http://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 
 Once you have a working install of Linux open the *Terminal*  and run:
+
 `sudo apt-get install g++ curl libssl-dev apache2-utils git-core`
-That will install everything you need to build/run a basic NodeJS app.
+
+That will install everything you need to build & run a basic NodeJS app.
 
 ####Install NodeJS
 ![node logo](http://nodejs.org/logo.png "Node Logo ")
@@ -58,14 +60,14 @@ If you got any error messages please go to: [Node install wiki](https://github.c
 In your terminal type:
 'gedit hello.js'
 and paste:
-`
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, "127.0.0.1");
-console.log('Server running at http://127.0.0.1:1337/');
-`
+
+	var http = require('http');
+	http.createServer(function (req, res) {
+	  res.writeHead(200, {'Content-Type': 'text/plain'});
+	  res.end('Hello World\n');
+	}).listen(80, "127.0.0.1");
+	console.log('Server running at http://127.0.0.1:80/');
+
 Save.
 In the terminal run:
 `node hello.js`
@@ -90,6 +92,11 @@ else troubleshoot at: [https://github.com/isaacs/npm](https://github.com/isaacs/
 ####MongoDB (the place to store all our data)
 
 
+####NPM Packages
+
+'npm install mongoose express-mongoose connect-mongodb jade less expresso forever forms express-resource'
+
+`npm install nodemon`
 
 ####Git Setup
 
@@ -135,7 +142,7 @@ Now back in the terminal:
 `git push -u origin master`
 
 Existing Git Repo?
-  'cd existing_git_repo
-  git remote add origin git@github.com:grpwnd/grpwnd.git
-  git push -u origin master'
+`cd existing_git_repo`
+`git remote add origin git@github.com:grpwnd/grpwnd.git`
+`git push -u origin master`
 

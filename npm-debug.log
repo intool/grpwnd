@@ -1,0 +1,131 @@
+info it worked if it ends with ok
+verbose cli [ 'node',
+verbose cli   '/usr/local/bin/npm',
+verbose cli   'install',
+verbose cli   'nodemon',
+verbose cli   '-g' ]
+info using npm@1.0.9
+info using node@v0.5.0-pre
+verbose config file /home/user/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose into /usr/local/lib [ 'nodemon' ]
+verbose cache add [ 'nodemon', null ]
+info addNamed [ 'nodemon', '' ]
+verbose addNamed [ null, '' ]
+verbose GET nodemon
+verbose raw, before any munging nodemon
+verbose url resolving [ 'http://registry.npmjs.org/', './nodemon' ]
+verbose url resolved http://registry.npmjs.org/nodemon
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/nodemon',
+verbose url parsed   pathname: '/nodemon' }
+verbose etag "ANWT9JH91YKN9ZQBPYXFJP22D"
+verbose response http://registry.npmjs.org/nodemon
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.0.2 (Erlang OTP/R14B)',
+silly get cb     etag: '"ANWT9JH91YKN9ZQBPYXFJP22D"',
+silly get cb     date: 'Fri, 03 Jun 2011 17:12:17 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag nodemon from cache
+verbose GET nodemon/0.5.2
+verbose raw, before any munging nodemon/0.5.2
+verbose url resolving [ 'http://registry.npmjs.org/', './nodemon/0.5.2' ]
+verbose url resolved http://registry.npmjs.org/nodemon/0.5.2
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/nodemon/0.5.2',
+verbose url parsed   pathname: '/nodemon/0.5.2' }
+verbose etag "ANWT9JH91YKN9ZQBPYXFJP22D"
+verbose response http://registry.npmjs.org/nodemon/0.5.2
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.0.2 (Erlang OTP/R14B)',
+silly get cb     etag: '"ANWT9JH91YKN9ZQBPYXFJP22D"',
+silly get cb     date: 'Fri, 03 Jun 2011 17:12:17 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag nodemon/0.5.2 from cache
+verbose bin dist [ null,
+verbose bin dist   { shasum: '21c43dba3ccc000501c3fff88288bf0f634ba539',
+verbose bin dist     tarball: 'http://registry.npmjs.org/nodemon/-/nodemon-0.5.2.tgz' } ]
+silly resolved [ { name: 'nodemon',
+silly resolved     homepage: 'http://github.com/remy/nodemon',
+silly resolved     author: { name: 'Remy Sharp', url: 'http://github.com/remy' },
+silly resolved     bin: { nodemon: './nodemon.js' },
+silly resolved     repository: 
+silly resolved      { type: 'git',
+silly resolved        url: 'git://github.com/remy/nodemon.git' },
+silly resolved     description: 'Simple monitor script for use during development of a node.js app.',
+silly resolved     keywords: 
+silly resolved      [ 'monitor',
+silly resolved        'development',
+silly resolved        'restart',
+silly resolved        'autoload',
+silly resolved        'reload',
+silly resolved        'terminal' ],
+silly resolved     version: '0.5.2',
+silly resolved     preferGlobal: 'true',
+silly resolved     main: './nodemon',
+silly resolved     dependencies: {},
+silly resolved     devDependencies: {},
+silly resolved     _id: 'nodemon@0.5.2',
+silly resolved     engines: { node: '*' },
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.0.3',
+silly resolved     _nodeVersion: 'v0.4.7',
+silly resolved     _defaultsLoaded: true,
+silly resolved     dist: 
+silly resolved      { shasum: '21c43dba3ccc000501c3fff88288bf0f634ba539',
+silly resolved        tarball: 'http://registry.npmjs.org/nodemon/-/nodemon-0.5.2.tgz' },
+silly resolved     scripts: {},
+silly resolved     directories: {} } ]
+info into /usr/local/lib nodemon@0.5.2
+info installOne nodemon@0.5.2
+info unbuild /usr/local/lib/node_modules/nodemon
+silly testEngine { name: 'nodemon',
+silly testEngine   homepage: 'http://github.com/remy/nodemon',
+silly testEngine   author: { name: 'Remy Sharp', url: 'http://github.com/remy' },
+silly testEngine   bin: { nodemon: './nodemon.js' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/remy/nodemon.git' },
+silly testEngine   description: 'Simple monitor script for use during development of a node.js app.',
+silly testEngine   keywords: 
+silly testEngine    [ 'monitor',
+silly testEngine      'development',
+silly testEngine      'restart',
+silly testEngine      'autoload',
+silly testEngine      'reload',
+silly testEngine      'terminal' ],
+silly testEngine   version: '0.5.2',
+silly testEngine   preferGlobal: 'true',
+silly testEngine   main: './nodemon',
+silly testEngine   _id: 'nodemon@0.5.2',
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.9',
+silly testEngine   _nodeVersion: 'v0.5.0-pre',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: { shasum: 'c2305a451cff1e57a74761fcbbc7b76e044c6c28' } }
+verbose caching /home/user/.npm/nodemon/0.5.2/package.json
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /usr/local/lib/node_modules/nodemon
+ERR! Could not create /usr/local/lib/node_modules/___nodemon.npm
+ERR! error installing nodemon@0.5.2 Error: EACCES, Permission denied '/usr/local/lib/node_modules/___nodemon.npm'
+info unbuild /usr/local/lib/node_modules/nodemon
+verbose installOne cb nodemon@0.5.2
+ERR! Error: EACCES, Permission denied '/usr/local/lib/node_modules/___nodemon.npm'
+ERR! 
+ERR! Please use 'sudo' or log in as root to run this command.
+ERR!     sudo npm "install" "nodemon" "-g"
+ERR! or set the 'unsafe-perm' config var to true.
+ERR!     npm config set unsafe-perm true
+ERR! 
+ERR! System Linux 2.6.32-5-686
+ERR! command "node" "/usr/local/bin/npm" "install" "nodemon" "-g"
+verbose exit [ 13, true ]
