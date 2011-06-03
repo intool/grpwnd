@@ -70,10 +70,11 @@ and paste:
 
 Save.
 In the terminal run:
-`node hello.js`
-
+	su -
+( we want to test if we can run node as root to get access to port 80 )
+	node hello.js
 Open a WebBrowser and visit the page:
-[http://127.0.0.1:1337/](http://127.0.0.1:1337/)
+[http://127.0.0.1:1337/](http://127.0.0.1/)
 
 To escape the Node server in terminal type:
 **CTRL + C**
