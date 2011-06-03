@@ -102,6 +102,7 @@ else troubleshoot at: [https://github.com/isaacs/npm](https://github.com/isaacs/
 
 ####MongoDB (the place to store all our data)
 
+add mongo... :-)
 
 ####NPM Packages
 
@@ -134,29 +135,25 @@ open/view the id_dsa.pub file with:
 `cat id_dsa.pub
 
 it will look something like:
->> ssh-dss AAAAB3NzaC1kc3MAAACBAMTbrIUDNhE+Krfp1JxTU0DjqLoF0cigYe/6DmGx/ZcXR306A7SBTZMeHcSRPaIP/2O2H3T16eG43l9vJfQqCdYmQ4zDSFhdHnIdbW1hBoYjCZhYK4N661K6Mc7ON5Llw15232WF9SR8w9EefU7PYih42RDwna/+i8pKEieu74sTAAAAFQCQ4VEcqQfnDb+R0MGmgESOUNAC9QAAAIBrH6H+ticqBTZ9x+qQNyHL1A3o7jvPF5oMLuOfxonZefWN300+toOBf0URsyCaZb7leO+jybb+F2ybnGXzQd0m2h6HXDLvbyT3WQ2BBePiaQUbedaDr3n5MrMf6IF44v8J3/fS1kASMcuvywMijVzvxQElY14uFllFmLfirFfZ0gAAAIA9Yielpsm9XxGwYfpIy9SemLJ8HWZv2lbD6PGUD4GxE5tqTe5PyFDxRMhuyCrp8xeL/vtMoh7V0NIPKI5wbQULmEM7OnFkyLQjKTFaZI2aoEN7kooIGUaVRiNku1aY4o4/ukGKfaQqeJtg3HV3nzJBJnITnGTzYMJG7U5kghQyZw== user@debian
+
+	ssh-dss AAAAB3NzaC1kc3MAAACBAMTbrIUDNhE+Krfp1JxTU0DjqLoF0cigYe/6DmGx/	ZcXR306A7SBTZMeHcSRPaIP/2O2H3T16eG43l9vJfQqCdYmQ4zDSFhdHnIdbW1hBoYjCZhYK4N661K6Mc7ON5Llw15232WF9SR8w9EefU7PYih42RDwna/+i8pKEieu74sTAAAAFQCQ4VEcqQfnDb+R0MGmgESOUNAC9QAAAIBrH6H+ticqBTZ9x+qQNyHL1A3o7jvPF5oMLuOfxonZefWN300+toOBf0URsyCaZb7leO+jybb+F2ybnGXzQd0m2h6HXDLvbyT3WQ2BBePiaQUbedaDr3n5MrMf6IF44v8J3/fS1kASMcuvywMijVzvxQElY14uFllFmLfirFfZ0gAAAIA9Yielpsm9XxGwYfpIy9SemLJ8HWZv2lbD6PGUD4GxE5tqTe5PyFDxRMhuyCrp8xeL/vtMoh7V0NIPKI5wbQULmEM7OnFkyLQjKTFaZI2aoEN7kooIGUaVRiNku1aY4o4/ukGKfaQqeJtg3HV3nzJBJnITnGTzYMJG7U5kghQyZw== user@debian
 
 Copy this as you need to paste it into your [GitHub SSH settings](https://github.com/account/ssh)
 
 Now back in the terminal:
-`mkdir grpwnd`
 
-`cd grpwnd`
-
-`git init`
-
-`touch README`
-
-`git add README`
-
-`git commit -m 'first commit'`
-
-`git remote add origin git@github.com:grpwnd/grpwnd.git`
-
-`git push -u origin master`
+	$ mkdir grpwnd
+	$ cd grpwnd
+	$ git init
+	$ touch README
+	$ git add README
+	$ git commit -m 'first commit'
+	$ git remote add origin git@github.com:grpwnd/grpwnd.git
+	$ git push -u origin master
 
 Existing Git Repo?
-`cd existing_git_repo`
-`git remote add origin git@github.com:grpwnd/grpwnd.git`
-`git push -u origin master`
+
+	$ cd existing_git_repo
+	$ git remote add origin git@github.com:grpwnd/grpwnd.git
+	$ git push -u origin master
 
