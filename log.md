@@ -54,6 +54,25 @@ if the message you get looks like:
 You are ready to *Node*!
 If you got any error messages please go to: [Node install wiki](https://github.com/joyent/node/wiki/Installation) for troubleshooting.
 
+#####Hello World App (to test its working!)
+In your terminal type:
+'gedit hello.js'
+and paste:
+`
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, "127.0.0.1");
+console.log('Server running at http://127.0.0.1:1337/');
+`
+Save.
+In the terminal run:
+`node hello.js`
+
+Open a WebBrowser and visit the page:
+[http://127.0.0.1:1337/](http://127.0.0.1:1337/)
+
 ####NPM (Node Package Manager)
 
 Run this command in your terminal:
@@ -64,7 +83,6 @@ Success message:
 >> It worked
 
 else troubleshoot at: [https://github.com/isaacs/npm](https://github.com/isaacs/npm)
-
 
 ####MongoDB (the place to store all our data)
 
@@ -95,4 +113,19 @@ it will look something like:
 >> ssh-dss AAAAB3NzaC1kc3MAAACBAMTbrIUDNhE+Krfp1JxTU0DjqLoF0cigYe/6DmGx/ZcXR306A7SBTZMeHcSRPaIP/2O2H3T16eG43l9vJfQqCdYmQ4zDSFhdHnIdbW1hBoYjCZhYK4N661K6Mc7ON5Llw15232WF9SR8w9EefU7PYih42RDwna/+i8pKEieu74sTAAAAFQCQ4VEcqQfnDb+R0MGmgESOUNAC9QAAAIBrH6H+ticqBTZ9x+qQNyHL1A3o7jvPF5oMLuOfxonZefWN300+toOBf0URsyCaZb7leO+jybb+F2ybnGXzQd0m2h6HXDLvbyT3WQ2BBePiaQUbedaDr3n5MrMf6IF44v8J3/fS1kASMcuvywMijVzvxQElY14uFllFmLfirFfZ0gAAAIA9Yielpsm9XxGwYfpIy9SemLJ8HWZv2lbD6PGUD4GxE5tqTe5PyFDxRMhuyCrp8xeL/vtMoh7V0NIPKI5wbQULmEM7OnFkyLQjKTFaZI2aoEN7kooIGUaVRiNku1aY4o4/ukGKfaQqeJtg3HV3nzJBJnITnGTzYMJG7U5kghQyZw== user@debian
 
 Copy this as you need to paste it into your [GitHub SSH settings](https://github.com/account/ssh)
+
+Now back in the terminal:
+`mkdir grpwnd
+  cd grpwnd
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:grpwnd/grpwnd.git
+  git push -u origin master`
+
+Existing Git Repo?
+  'cd existing_git_repo
+  git remote add origin git@github.com:grpwnd/grpwnd.git
+  git push -u origin master'
 
