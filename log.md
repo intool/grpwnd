@@ -73,6 +73,9 @@ In the terminal run:
 Open a WebBrowser and visit the page:
 [http://127.0.0.1:1337/](http://127.0.0.1:1337/)
 
+To escape the Node server in terminal type:
+**CTRL + C**
+
 ####NPM (Node Package Manager)
 
 Run this command in your terminal:
