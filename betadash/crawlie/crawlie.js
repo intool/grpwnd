@@ -1,4 +1,4 @@
-require('node.io').scrape(function() {
+require('/usr/local/lib/node_modules/node.io').scrape(function() {
     this.getHtml('http://www.reddit.com/', function(err, $) {
         var stories = [];
         $('a.title').each(function(title) {
