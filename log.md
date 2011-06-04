@@ -6,7 +6,7 @@ Its structured chronologically so you can follow at home :-)
 
 If you don't know what you are doing '*under the hood*' of a PC or you have never written any code, this will not be the best place to learn... Not that the log is incomplete, just because I do not recommend trying to *fly* before you can crawl! Go read up on [JavaScript](http://en.wikipedia.org/wiki/JavaScript), [HTML](http://en.wikipedia.org/wiki/HTML) [Servers](http://en.wikipedia.org/wiki/Web_server) and [How Web Servers Work](http://www.howstuffworks.com/web-server.htm/printable) before attempting any of the *fancy* **NodeJS** stuff! NodeJS is the ClusterBomb of Programming... Seriously kids, don't play with weapons! 
 
-##Crack On :-)
+##
 There are plenty of excellent NodeJS resources
 
 
@@ -87,8 +87,7 @@ In the terminal run:
 
 Open a WebBrowser and visit the page: [http://127.0.0.1/](http://127.0.0.1/)
 
-To escape the Node server in terminal type:
-**CTRL + C**
+To escape the Node server in terminal type: **CTRL + C**
 
 ####NPM (Node Package Manager)
 
@@ -97,8 +96,9 @@ Run this command in your terminal:
 	$ curl http://npmjs.org/install.sh | sh
 
 Success message:
->> /usr/local/bin/npm -> /usr/local/lib/node_modules/npm/bin/npm.js npm@1.0.9 /usr/local/lib/node_modules/npm 
->> It worked
+
+	>> /usr/local/bin/npm -> /usr/local/lib/node_modules/npm/bin/npm.js npm@1.0.9 /usr/local/lib/node_modules/npm 
+	>> It worked
 
 else troubleshoot at: [https://github.com/isaacs/npm](https://github.com/isaacs/npm)
 
@@ -108,11 +108,11 @@ add mongo... :-)
 
 ####NPM Packages
 
-	$ npm install mongoose express-mongoose connect-mongodb jade less expresso forever forms express-resource
+	$ npm install express mongoose express-mongoose connect-mongodb jade stylus less expresso forever forms express-resource
 	$ su -
 	$ npm install nodemon -g
 
-####Git Setup
+####[Git Setup](http://help.github.com/linux-set-up-git/)
 
 If you have not yet registered for a [GitHub]() account, what are you wating for? Go to (https://github.com/signup/free)[https://github.com/signup/free] and get your **Free** account! :-)
 
@@ -120,8 +120,8 @@ Now run the initial commands in terminal:
 
 *Replace with your own details*
 
-	$ git config --global user.name "Alan Touring"
-	$ git config --global user.email grpwnd@gmail.com
+	$ git config --global user.name "**Alan Touring**"
+	$ git config --global user.email **grpwnd@gmail.com**
 
 **IF** you don't alreay have an SSH Public/Private key you will need to create one:
 
@@ -134,7 +134,7 @@ to view the files:
 	$ ls
 
 open/view the id_dsa.pub file with:
-`cat id_dsa.pub
+ $ cat id_dsa.pub
 
 it will look something like:
 
