@@ -44,7 +44,7 @@ to include the lib call:
 
 Test file:
 
-	$ gedit cralwie.js
+	$ gedit crawlie.js
 
 Paste: 
 
@@ -71,7 +71,42 @@ Paste:
 
 	*/1 * * * * /home/user/node/node /home/user/grpwnd/betadash/crawlie/crawlie.js
 
+Ok so we are slurping in the raw html/xml data now we need to parse it.
 
+#####[node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)
+
+Simple XML to JavaScript object converter taht uses sax-js
+
+	$ npm install xml2js
+
+	xml2js@0.1.6 ./node_modules/xml2js 
+	└── sax@0.1.2
+
+*note: this is in the list to install in Appendix A * :-)
+
+######Simple Usage:
+
+	var sys = require('sys'),
+    	fs = require('fs'),
+    	xml2js = require('xml2js');
+
+	var parser = new xml2js.Parser();
+	parser.addListener('end', function(result) {
+    		console.log(sys.inspect(result));
+    		console.log('Done.');
+	});
+	fs.readFile(__dirname + '/foo.xml', function(err, data) {
+    	parser.parseString(data);
+	});
+
+
+
+#####[libxmljs](https://github.com/polotek/libxmljs)
+
+Decided to try [libxmljs](https://github.com/polotek/libxmljs) as it has better documentation...
+But fails when trying to install via npm... :-(
+Added a [comment](https://github.com/polotek/libxmljs/issues/34#issuecomment-1306054) to the issue Q on github.
+If I get a response, I will re-try libxmljs but for now have to keep working with node-xml2js. 
 
 
 ##Appendix A - Up And Running
