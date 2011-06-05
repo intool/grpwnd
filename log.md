@@ -6,9 +6,70 @@ Its structured chronologically so you can follow at home :-)
 
 If you don't know what you are doing '*under the hood*' of a PC or you have never written any code, this will not be the best place to learn... Not that the log is incomplete, just because I do not recommend trying to *fly* before you can crawl! Go read up on [JavaScript](http://en.wikipedia.org/wiki/JavaScript), [HTML](http://en.wikipedia.org/wiki/HTML) [Servers](http://en.wikipedia.org/wiki/Web_server) and [How Web Servers Work](http://www.howstuffworks.com/web-server.htm/printable) before attempting any of the *fancy* **NodeJS** stuff! NodeJS is the ClusterBomb of Programming... Seriously kids, don't play with weapons! 
 
-##
+##Enough Chat Lets Pwn Some Knowledge!
+
 There are plenty of excellent NodeJS resources
 
+###Crawling and XML/HTML Parsing 
+
+####Brief review of [NodeJS XML Modules](https://github.com/joyent/node/wiki/modules#parsers-xml)
+
+As usual, there is no clear direction on which XML Parsing module to use, so I will test a handful until I find one that works.
+
+#####[FAIL] [Node-XML](https://github.com/robrighter/node-xml/wiki) - the aparantly simple choice...?
+
+	$ npm install node-xml **FAILS**
+	
+	$ mkdir crawlie
+	$ git clone git://github.com/robrighter/node-xml.git
+
+Its an OK module but a quick search reveals taht the node.io module has 10x the watchers on github so looking into that instead... :-O
+
+#####[node.io](https://github.com/chriso/node.io)
+	
+	$ su -
+	$ npm install node.io -g
+
+Success:
+
+	node.io@0.3.0 /usr/local/lib/node_modules/node.io 
+	├── coffee-script@1.1.1
+	├── htmlparser@1.7.3
+	└── jquery@1.5.1
+
+
+to include the lib call:
+
+	require('/usr/local/lib/node_modules/node.io') 
+
+Test file:
+
+	$ gedit cralwie.js
+
+Paste: 
+
+	require('/usr/local/lib/node_modules/node.io').scrape(function() {
+    		this.getHtml('http://www.reddit.com/', function(err, $) {
+        	var stories = [];
+        	$('a.title').each(function(title) {
+            		stories.push(title.text);
+        	});
+        	this.emit(stories);
+    		});
+	});
+
+Run:
+
+	$ node crawlie.js
+
+it works.
+Now lets setup **CRON** to run it every minute:
+
+	$ crontab -e
+
+Paste:	
+
+	*/1 * * * * /home/user/node/node /home/user/grpwnd/betadash/crawlie/crawlie.js
 
 
 
@@ -89,6 +150,9 @@ Open a WebBrowser and visit the page: [http://127.0.0.1/](http://127.0.0.1/)
 
 To escape the Node server in terminal type: **CTRL + C**
 
+#####A Few Resources
+[Node Beginner Toutorials](http://nodebeginner.org)
+
 ####NPM (Node Package Manager)
 
 Run this command in your terminal:
@@ -134,11 +198,14 @@ to view the files:
 	$ ls
 
 open/view the id_dsa.pub file with:
- $ cat id_dsa.pub
 
-it will look something like:
+	$ cat id_dsa.pub
+
+The output will look something like this:
 
 	ssh-dss AAAAB3NzaC1kc3MAAACBAMTbrIUDNhE+Krfp1JxTU0DjqLoF0cigYe/6DmGx/	ZcXR306A7SBTZMeHcSRPaIP/2O2H3T16eG43l9vJfQqCdYmQ4zDSFhdHnIdbW1hBoYjCZhYK4N661K6Mc7ON5Llw15232WF9SR8w9EefU7PYih42RDwna/+i8pKEieu74sTAAAAFQCQ4VEcqQfnDb+R0MGmgESOUNAC9QAAAIBrH6H+ticqBTZ9x+qQNyHL1A3o7jvPF5oMLuOfxonZefWN300+toOBf0URsyCaZb7leO+jybb+F2ybnGXzQd0m2h6HXDLvbyT3WQ2BBePiaQUbedaDr3n5MrMf6IF44v8J3/fS1kASMcuvywMijVzvxQElY14uFllFmLfirFfZ0gAAAIA9Yielpsm9XxGwYfpIy9SemLJ8HWZv2lbD6PGUD4GxE5tqTe5PyFDxRMhuyCrp8xeL/vtMoh7V0NIPKI5wbQULmEM7OnFkyLQjKTFaZI2aoEN7kooIGUaVRiNku1aY4o4/ukGKfaQqeJtg3HV3nzJBJnITnGTzYMJG7U5kghQyZw== user@debian
+
+Note: if you have never seen public/private key before please go do your [ssh homework](http://en.wikipedia.org/wiki/Secure_Shell)
 
 Copy this as you need to paste it into your [GitHub SSH settings](https://github.com/account/ssh)
 
