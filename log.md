@@ -99,14 +99,54 @@ Simple XML to JavaScript object converter taht uses sax-js
     	parser.parseString(data);
 	});
 
+Had to call it a day on xml2js because *at the time of writing* June 2011 there is no wiki, documentation or any sort of usage examples...
+And I agree with [this issue](https://github.com/Leonidas-from-XIV/node-xml2js/issues/1) on github regarding the syntax.
 
+	$ node parse_test.js
+
+Outputs:
+
+	city: { '@': [Object], country: [Object] },
+        type: { '@': [Object] },
+        status: { '@': [Object] } } }
+
+There is no clear way to assign the parsed object to an array and then access the atributes.
+So...
 
 #####[libxmljs](https://github.com/polotek/libxmljs)
 
 Decided to try [libxmljs](https://github.com/polotek/libxmljs) as it has better documentation...
 But fails when trying to install via npm... :-(
 Added a [comment](https://github.com/polotek/libxmljs/issues/34#issuecomment-1306054) to the issue Q on github.
-If I get a response, I will re-try libxmljs but for now have to keep working with node-xml2js. 
+If I get a response, I will re-try libxmljs but for now so *onto the next one...*
+
+#####[node-o3-xml](https://github.com/ajaxorg/node-o3-xml)
+
+According to [this stack faq](http://stackoverflow.com/questions/5672151/any-recommendation-for-xml-to-json-for-node-js) the next one to try is node-o3-xml.
+Lets go!
+
+	$ npm install node-o3-xml **[FAIL]**
+	$ cd node_modules
+	$ git clone https://github.com/ajaxorg/node-o3-xml
+
+Success outputs:
+
+	Cloning into node-o3-xml...
+	remote: Counting objects: 255, done.
+	remote: Compressing objects: 100% (135/135), done.
+	remote: Total 255 (delta 79), reused 255 (delta 79)
+	Receiving objects: 100% (255/255), 39.42 MiB | 147 KiB/s, done.
+	Resolving deltas: 100% (79/79), done.
+
+A **40 MB** Lib!! WTF! Just to parse a bit of XML... don't know efficient this is going to be.
+
+So tried the [example.js](https://github.com/ajaxorg/node-o3-xml/blob/master/example/example.js) note had to change the require resource to: 
+`var xml = require("../node-o3-xml/lib/o3-xml");` but got a 
+
+	**Segmentation Fault**
+
+As per [this issue](https://github.com/ajaxorg/node-o3-xml/issues/11) *I'm a Sad Panda...* :-(
+
 
 
 ##Appendix A - Up And Running
