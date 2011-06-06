@@ -261,6 +261,8 @@ Then run:
 	$ sudo apt-get update 
 	$ sudo apt-get install mongodb-10gen **IGNORE** use mongodb instead of the 10gen version!
 
+Output:
+
 	The following NEW packages will be installed:
   	mongodb-10gen
 	0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
@@ -301,21 +303,44 @@ So:
 
 	$ sudo apt-get install mongodb
 
-To start the server:
+#####Starting Up
+
+To start the MongoDatabase server, type this command:
 
 	$ mongod 
 
+You should see something like:
+
+	mongod --help for help and startup options
+	Sun Jun  6 06:24:57 Mongo DB : starting : pid = 2743 port = 27017 dbpath = /data/db/ master = 0 slave = 0  32-bit 
+
+	** NOTE: when using MongoDB 32 bit, you are limited to about 2 gigabytes of data
+	**       see http://blog.mongodb.org/post/137788967/32-bit-limitations for more
+
+	Mon Jun  6 09:24:57 db version v1.4.4, pdfile version 4.5
+	Mon Jun  6 09:24:57 git version: nogitversion
+	Mon Jun  6 09:24:57 sys info: Linux murphy 2.6.32.14-dsa-ia32 #1 SMP Thu May 27 16:19:20 CEST 2010 i686 	BOOST_LIB_VERSION=1_42
+	Mon Jun  6 09:24:57 waiting for connections on **port 27017**
+	Mon Jun  6 09:24:57 **web admin interface listening on port 28017**
+
+**GREAT SUCCESS!!** - if not, google the *exact* err msg you get when starting up and you easily find the solution... :-)
+
 Now go thru the [short tutorial](http://api.mongodb.org/wiki/current/Tutorial.html)
 
-MongoDB shell version: 1.8.1
-usage: mongo [options] [db address] [file names (ending in .js)]
-db address can be:
-  foo                   foo database on local machine
-  192.169.0.5/foo       foo database on 192.168.0.5 machine
-  192.169.0.5:9999/foo  foo database on 192.168.0.5 machine on port 9999
-options:
-  --shell               run the shell after executing files
-  --nodb                don't connect to mongod on startup - no 'db address' 
+	MongoDB shell version: 1.8.1
+	usage: mongo [options] [db address] [file names (ending in .js)]
+	db address can be:
+	  foo                   foo database on local machine
+	  192.169.0.5/foo       foo database on 192.168.0.5 machine
+	  192.169.0.5:9999/foo  foo database on 192.168.0.5 machine on port 9999
+	options:
+	  --shell               run the shell after executing files
+	  --nodb                don't connect to mongod on startup - no 'db address' 
+
+
+
+
+--------
 
 ####NPM Packages
 
@@ -376,6 +401,16 @@ Existing Git Repo?
 
 ##Appendix B - Misc Resources
 
+-[MongoDB Command Line Parameters](http://www.mongodb.org/display/DOCS/Command+Line+Parameters) a good list of all the options you can pass into the **mongod** command to specify a diff port, data dir or mem cache.
+
+- [Node JS Event Emiters and Callbacks](http://howtonode.org/control-flow-part-ii) - Read up if you are having issues understanding the diference.
+
+- [Getting started with Node.io](https://github.com/chriso/node.io/wiki/Getting-Started) - The Wiki for the project.
+
 - [Good introduction to Global Variables in JS](http://snook.ca/archives/javascript/global_variable) - If you have not yet read *"The Good Parts"* by DC then this will be a good primer. 
 
+###Interesting Stuff To Look Into *Later*
 
+- [Monkey.org Crawl](http://monkey.org/~provos/crawl/) utility starts a depth-first traversal of the web at the specified URLs. It stores all JPEG images that match the configured constraints. Crawl is fairly fast and allows for graceful termination. After terminating crawl, it is possible to restart it at exactly the same spot where it was terminated. Crawl keeps a persistent database that allows multiple crawls without revisiting sites. -- ** Look into when building a more feature-rich crawler **
+
+- 
