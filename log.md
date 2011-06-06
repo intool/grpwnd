@@ -113,12 +113,17 @@ Outputs:
 There is no clear way to assign the parsed object to an array and then access the atributes.
 So...
 
+Must keep trying.
+
+
+
 #####[libxmljs](https://github.com/polotek/libxmljs)
 
 Decided to try [libxmljs](https://github.com/polotek/libxmljs) as it has better documentation...
 But fails when trying to install via npm... :-(
 Added a [comment](https://github.com/polotek/libxmljs/issues/34#issuecomment-1306054) to the issue Q on github.
 If I get a response, I will re-try libxmljs but for now so *onto the next one...*
+
 
 #####[node-o3-xml](https://github.com/ajaxorg/node-o3-xml)
 
@@ -243,7 +248,74 @@ else troubleshoot at: [https://github.com/isaacs/npm](https://github.com/isaacs/
 
 ####MongoDB (the place to store all our data)
 
-add mongo... :-)
+Please note this installation is **Specific** to **Debian/Ubuntu** Linux! Visit [mongodb](http://www.mongodb.org/downloads) if you have anything else!
+
+	$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+
+Now add this line to your sources: 
+
+	deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
+
+Then run:
+
+	$ sudo apt-get update 
+	$ sudo apt-get install mongodb-10gen **IGNORE** use mongodb instead of the 10gen version!
+
+	The following NEW packages will be installed:
+  	mongodb-10gen
+	0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+	Need to get 26.9 MB of archives.
+	After this operation, 68.2 MB of additional disk space will be used.
+	Get:1 http://downloads-distro.mongodb.org/repo/ubuntu-upstart/ dist/10gen mongodb-10gen i386 1.8.1 [26.9 MB]
+	**Fetched 26.9 MB in 2min 38s (169 kBs)**
+	Selecting previously deselected package mongodb-10gen.
+	(Reading database ... 132715 files and directories currently installed.)
+	Unpacking mongodb-10gen (from .../mongodb-10gen_1.8.1_i386.deb) ...
+	Processing triggers for man-db ...
+	Setting up mongodb-10gen (1.8.1) ...
+	Adding system user `mongodb' (UID 109) ...
+	Adding new user `mongodb' (UID 109) with group `nogroup' ...
+	Not creating home directory `/home/mongodb'.
+	Adding group `mongodb' (GID 117) ...
+	Done.
+
+Now we need to create the data dir:
+
+	$ sudo mkdir /data /data/db
+	$ sudo chown mongodb /data/db
+
+Check the settings at **/etc/mongodb.conf**
+
+	$  cat /etc/mongodb.conf
+
+
+
+Tried:
+	sudo apt-get install mongodb-stable
+
+got:
+
+	E: Package 'mongodb-stable' has no installation candidate
+
+So:
+
+	$ sudo apt-get install mongodb
+
+To start the server:
+
+	$ mongod 
+
+Now go thru the [short tutorial](http://api.mongodb.org/wiki/current/Tutorial.html)
+
+MongoDB shell version: 1.8.1
+usage: mongo [options] [db address] [file names (ending in .js)]
+db address can be:
+  foo                   foo database on local machine
+  192.169.0.5/foo       foo database on 192.168.0.5 machine
+  192.169.0.5:9999/foo  foo database on 192.168.0.5 machine on port 9999
+options:
+  --shell               run the shell after executing files
+  --nodb                don't connect to mongod on startup - no 'db address' 
 
 ####NPM Packages
 
@@ -300,4 +372,10 @@ Existing Git Repo?
 	$ cd existing_git_repo
 	$ git remote add origin git@github.com:grpwnd/grpwnd.git
 	$ git push -u origin master
+
+
+##Appendix B - Misc Resources
+
+- [Good introduction to Global Variables in JS](http://snook.ca/archives/javascript/global_variable) - If you have not yet read *"The Good Parts"* by DC then this will be a good primer. 
+
 
