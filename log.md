@@ -401,6 +401,10 @@ Existing Git Repo?
 
 ##Appendix B - Misc Resources
 
+- [StackOverflow Discussion of Best IDE for JS](http://stackoverflow.com/questions/41880/javascript-ides) and [here](http://stackoverflow.com/questions/187818/any-ides-for-javascript-html) -- I'm using [jedit](http://www.jedit.org/) as its lightweigt, has a file browser and opens each source file in its own window which is good if you have multi-monitor config. :-)
+
+- Excellent [Object.size method](http://stackoverflow.com/questions/5223/length-of-javascript-associative-array) for determining the size of any object/array in JS. -- I think it might the exact same one in DC's *The Good Parts*.
+
 -[MongoDB Command Line Parameters](http://www.mongodb.org/display/DOCS/Command+Line+Parameters) a good list of all the options you can pass into the **mongod** command to specify a diff port, data dir or mem cache.
 
 - [Node JS Event Emiters and Callbacks](http://howtonode.org/control-flow-part-ii) - Read up if you are having issues understanding the diference.
