@@ -152,6 +152,11 @@ So tried the [example.js](https://github.com/ajaxorg/node-o3-xml/blob/master/exa
 
 As per [this issue](https://github.com/ajaxorg/node-o3-xml/issues/11) *I'm a Sad Panda...* :-(
 
+Never a good sign when you see this:
+
+	Count :: 208
+	(node) warning: possible EventEmitter memory leak detected. 11 listeners added. Use emitter.setMaxListeners() to increase limit.
+
 
 
 ##Appendix A - Up And Running
@@ -337,6 +342,96 @@ Now go thru the [short tutorial](http://api.mongodb.org/wiki/current/Tutorial.ht
 	  --shell               run the shell after executing files
 	  --nodb                don't connect to mongod on startup - no 'db address' 
 
+####Authentication [Security](http://www.mongodb.org/display/DOCS/Security+and+Authentication)
+
+If no users are configured in admin.system.users, one may access the database from the localhost interface without authenticating. Thus, from the server running the database (and thus on localhost), run the database shell and configure an administrative user:
+
+	$ ./mongo
+	> use admin
+	> db.addUser("theadmin", "anadminpassword") // sorry, not putting actuals in a public log - for obvious reasons! :-p
+	{
+	"user" : "theadmin",
+	"readOnly" : false,
+	"pwd" : "d020be8fae8e5a9952001660b1519d70"
+	}
+
+
+We now have a user created for database admin. Note that if we have not previously authenticated, we now must if we wish to perform further operations, as there is a user in admin.system.users.
+
+	> db.auth("theadmin", "anadminpassword")
+
+We can view existing users for the database with the command:
+
+	> db.system.users.find()
+
+**Causing Connection Error with Native Driver...!**
+
+	> db.removeUser( theadmin )
+
+####MongoDB NodeJS Modules
+
+Need to do a quick eval of the different [MongoDB NodeJS Modules](https://github.com/joyent/node/wiki/modules#db-nosql-mongo) to confirm which is the fastes/easiest to use.
+
+-  [Node-MongoDB-Native](https://github.com/christkv/node-mongodb-native) - from the number of watchers on GitHub (664) appears to be the obvious choice.
+
+Syntax:
+
+	var client = new Db('test', new Server("127.0.0.1", 27017, {})),
+    		test = function (err, collection) {
+     	 		collection.insert({a:2}, function(err, docs) {
+
+        		collection.count(function(err, count) {
+          		test.assertEquals(1, count);
+        		});
+
+        	// Locate all the entries using find
+        	collection.find().toArray(function(err, results) {
+          		test.assertEquals(1, results.length);
+          		test.assertTrue(results.a === 2);
+
+          	// Let's close the db
+          	client.close();
+        	});
+      	    });
+    	};
+
+	client.open(function(err, p_client) {
+  		client.collection('test_insert', test);
+	});
+
+Certainly full featured...
+
+Install:
+
+	$ git clone https://github.com/christkv/node-mongodb-native
+	$ cd node-mongodb-native
+	$ make
+
+Success:
+
+	'build' finished successfully (5.523s)
+	=== EXECUTING TEST_BSON ===
+	=== EXECUTING TEST_FULL_BSON ===
+	make[1]: Leaving directory `/home/user/grpwnd/node_modules/node-mongodb-native/external-libs/bson'
+
+
+-  But... the [syntax](http://stackoverflow.com/questions/4688693/node-js-mongodb) of [MongoSkin](https://github.com/guileen/node-mongoskin) is far simpler to grok.
+
+e.g:
+
+	var mongo = require('mongoskin');
+	var db = mongo.db('admin:pass@localhost/mydb?auto_reconnnect');
+	db.collection('mycollection').find().toArray(function(err, items){
+  		 // do something with items
+	});
+
+Quite simpel... :-)
+
+	$ npm install mongoskin 
+
+	make[1]: Leaving directory `/home/user/grpwnd/node_modules/mongoskin/node_modules/mongodb/external-libs/bson'
+	mongoskin@0.1.3 ./node_modules/mongoskin 
+	└── mongodb@0.9.4-5
 
 
 
@@ -399,19 +494,135 @@ Existing Git Repo?
 	$ git push -u origin master
 
 
+####[LAMP](http://en.wikipedia.org/wiki/LAMP_(software_bundle)) Stack
+
+For when you need to resort to bad habits... [setup tutorial](http://linux.justinhartman.com/Setting_up_a_LAMP_Server)
+
+#####Apache2+PHP5:
+
+Install:
+
+	$ apt-get install apache2 php5 libapache2-mod-php5
+
+Output:
+
+	Creating config file /etc/php5/cli/php.ini with new version
+	update-alternatives: using /usr/bin/php5 to provide /usr/bin/php (php) in auto mode.
+	Setting up php5-suhosin (0.9.32.1-1) ... done.
+
+Start:
+
+	$ /etc/init.d/apache2 restart
+
+Check:
+
+	$ vi /var/www/test.php
+
+Paste:
+	
+	<?php phpinfo(); ?>
+
+php.ini:
+
+	$ gedit /etc/php5/apache2/php.ini
+
+Change:
+
+-  memory_limit = 1028M
+-  max_execution_time = 300
+-  max_input_time = 600
+-  upload_max_filesize = 500M
+-  post_max_size = 280M
+
+#####MySQL
+
+Install:
+
+	$ apt-get install mysql-server mysql-client php5-mysql
+
+Conf:
+
+	$ gedit /etc/mysql/my.cnf
+
+#####PHPMyAdmin
+
+Install:
+
+	$ apt-get install phpmyadmin
+
+Update conf:
+
+	$ vi /etc/apache2/apache2.conf
+
+Paste:
+
+	Include /etc/phpmyadmin/apache.conf
+
+#####*SuperQuick* **INSECURE** PHP File Uploads *NEVER USE IN PRODUCTION!!* :
+
+upload.html:
+
+	<html>
+	  <body>
+
+		<form action="uploader.php" method="post" enctype="multipart/form-data">
+		 <label for="file">Filename:</label>
+		 <input type="file" name="file" id="file" /> 
+		 <br />
+		 <input type="submit" name="submit" value="Submit" />
+		</form>
+
+	  </body>
+	</html>
+
+uploader.php:
+
+	<?php
+	  $target_path = "./uploads/";
+
+	  $target_path = $target_path . basename( $_FILES['file']['name']); 
+
+	if(move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
+	    echo "The file ".  basename( $_FILES['file']['name']) ." has been uploaded";
+	} else{
+    	    echo "There was an error uploading the file to :: " .$target_path ." ... please try again!";
+	}
+	?>
+
+
+
 ##Appendix B - Misc Resources
 
-- [StackOverflow Discussion of Best IDE for JS](http://stackoverflow.com/questions/41880/javascript-ides) and [here](http://stackoverflow.com/questions/187818/any-ides-for-javascript-html) -- I'm using [jedit](http://www.jedit.org/) as its lightweigt, has a file browser and opens each source file in its own window which is good if you have multi-monitor config. :-)
+- [Javascript Date Basics](http://www.web-source.net/web_development/javascript_date.htm)
 
-- Excellent [Object.size method](http://stackoverflow.com/questions/5223/length-of-javascript-associative-array) for determining the size of any object/array in JS. -- I think it might the exact same one in DC's *The Good Parts*.
+	var now = new Date();	
 
--[MongoDB Command Line Parameters](http://www.mongodb.org/display/DOCS/Command+Line+Parameters) a good list of all the options you can pass into the **mongod** command to specify a diff port, data dir or mem cache.
+		getTime() - Number of milliseconds since 1/1/1970 @ 12:00 AM
+		getSeconds() - Number of seconds (0-59)
+		getMinutes() - Number of minutes (0-59)
+		getHours() - Number of hours (0-23)
+		getDay() - Day of the week(0-6). 0 = Sunday, ... , 6 = Saturday
+		getDate() - Day of the month (0-31)
+		getMonth() - Number of month (0-11)
+		getFullYear() - The four digit year (1970-9999)
+
+- [StackOverflow Discussion of Best IDE for JS](http://stackoverflow.com/questions/41880/javascript-ides), [With JQuery Support](http://stackoverflow.com/questions/209126/good-javascript-ide-with-jquery-support) and [JSf + HTML](http://stackoverflow.com/questions/187818/any-ides-for-javascript-html) -- I'm using [jedit](http://www.jedit.org/) as its lightweigt, has a file browser and opens each source file in its own window which is good if you have multi-monitor config. :-) -- But another option is [Aptana Studio](http://docs.aptana.com/docs/index.php/Installing_Aptana_on_Linux) which is more feature-rich but I find it a bit slower when running in a VM. if you have a *Native* linux/mac computer with a decent amount of RAM, then Aptana is the way to go.
+
+- Excellent [Object.size method](http://stackoverflow.com/questions/5223/length-of-javascript-associative-array) for determining the size of any object/array in JS. -- I think it might be the *exact* same one as in DC's *The Good Parts*.
+
+- [MongoDB Security & Authentication](http://www.mongodb.org/display/DOCS/Security+and+Authentication) - For obvious reasons, we need to ensure a simple level of security. But as we are sharing our code on GitHub we need to remember to change the passwords in production. :-)
+
+- [MongoDB Command Line Parameters](http://www.mongodb.org/display/DOCS/Command+Line+Parameters) a good list of all the options you can pass into the **mongod** command to specify a diff port, data dir or mem cache.
 
 - [Node JS Event Emiters and Callbacks](http://howtonode.org/control-flow-part-ii) - Read up if you are having issues understanding the diference.
 
 - [Getting started with Node.io](https://github.com/chriso/node.io/wiki/Getting-Started) - The Wiki for the project.
 
 - [Good introduction to Global Variables in JS](http://snook.ca/archives/javascript/global_variable) - If you have not yet read *"The Good Parts"* by DC then this will be a good primer. 
+
+
+-------
+
 
 ###Interesting Stuff To Look Into *Later*
 
