@@ -290,12 +290,11 @@ Now we need to create the data dir:
 
 	$ sudo mkdir /data /data/db
 	$ sudo chown mongodb /data/db
+	$ sudo chown `id -u` /data/db
 
 Check the settings at **/etc/mongodb.conf**
 
 	$  cat /etc/mongodb.conf
-
-
 
 Tried:
 	sudo apt-get install mongodb-stable
@@ -303,7 +302,6 @@ Tried:
 got:
 
 	E: Package 'mongodb-stable' has no installation candidate
-
 So:
 
 	$ sudo apt-get install mongodb
@@ -341,6 +339,12 @@ Now go thru the [short tutorial](http://api.mongodb.org/wiki/current/Tutorial.ht
 	options:
 	  --shell               run the shell after executing files
 	  --nodb                don't connect to mongod on startup - no 'db address' 
+
+####Repairing After a *Hard Shutdown*, Server Fail or Power Outage [Durability & Repair](http://www.mongodb.org/display/DOCS/Durability+and+Repair)
+
+If for any reason your mongod server is shut down, you may need to run this command:
+
+	$ mongod --repair
 
 ####Authentication [Security](http://www.mongodb.org/display/DOCS/Security+and+Authentication)
 
@@ -512,7 +516,7 @@ Output:
 
 Start:
 
-	$ /etc/init.d/apache2 restart
+	$ /etc/init.d/apache2 start
 
 Check:
 
@@ -526,13 +530,17 @@ php.ini:
 
 	$ gedit /etc/php5/apache2/php.ini
 
-Change:
+**DEVELOPMENT VALUES**:
 
 -  memory_limit = 1028M
 -  max_execution_time = 300
 -  max_input_time = 600
 -  upload_max_filesize = 500M
 -  post_max_size = 280M
+
+Restart:
+
+	$ /etc/init.d/apache2 restart
 
 #####MySQL
 
@@ -589,9 +597,19 @@ uploader.php:
 	}
 	?>
 
+Import a MYSQL Dump:
+
+	mysql -u username -p databasename < mysqlfile.sql
+e.g.
+
+	mysql -u root -p dealzip < dealzip6m_8m.sql
+
+
 
 
 ##Appendix B - Misc Resources
+
+- [Javascript Namespace Declaration](http://stackoverflow.com/questions/881515/javascript-namespace-declaration) -- essential for keeping code tidy.
 
 - [Javascript Date Basics](http://www.web-source.net/web_development/javascript_date.htm)
 
