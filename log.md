@@ -496,6 +496,12 @@ Existing Git Repo?
 	$ cd existing_git_repo
 	$ git remote add origin git@github.com:grpwnd/grpwnd.git
 	$ git push -u origin master
+	
+On a new computer:
+	
+	$ git clone git://github.com/grpwnd/grpwnd
+	$ cd grpwnd
+	$ git remote add tpsorigin git@github.com:grpwnd/grpwnd.git
 
 
 ####[LAMP](http://en.wikipedia.org/wiki/LAMP_(software_bundle)) Stack
