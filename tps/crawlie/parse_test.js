@@ -7,6 +7,7 @@ parser.addListener('end', function(result) {
     console.log(sys.inspect(result));
     console.log('Done.');
 });
+
 fs.readFile(__dirname + '/deal.xml', function(err, data) {
     parser.parseString(data);
 });

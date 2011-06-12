@@ -1,6 +1,17 @@
 var io = require('/usr/local/lib/node_modules/node.io'),
     sys = require('sys'),
-    fs = require('fs');
+    fs = require('fs'),
+    xml2js = require('xml2js'),
+    cfn = require('./crawl_fn');
+
+var mongo = require("node-mongodb-native");
+
+var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
+var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : mongo.Connection.DEFAULT_PORT;
+var db   = new mongo.Db('mydb', new mongo.Server(host, port, {}), {});
+
+var D = new Date(),
+    t = cfn.minofday(D); 
 
 var period = 10000;
 // var interval = setInterval(function() {
