@@ -69,9 +69,29 @@ Now lets setup **CRON** to run it every minute:
 
 Paste:	
 
-	*/1 * * * * /home/user/node/node /home/user/grpwnd/betadash/crawlie/crawlie.js
+	*/1 * * * * /root/node/node /root/node/grpwnd/tps/crawlie/crawlie.js
 
 Ok so we are slurping in the raw html/xml data now we need to parse it.
+
+	$ which mongod
+	> /usr/bin/mongod
+	$ nohup /usr/bin/mongod &
+	
+
+######[Time Zone Change]
+
+check:
+
+	$ date
+	>> Sun Jun 12 12:15:48 EDT 2011
+	$ cd /etc
+	$ mv localtime localtime_BAK
+	$ ln -sf /usr/share/zoneinfo/Europe/London localtime
+	
+	// confrim:
+	$ date
+	>> Sun Jun 12 17:18:44 BST 2011
+
 
 #####[node-xml2js](https://github.com/Leonidas-from-XIV/node-xml2js)
 
@@ -372,6 +392,24 @@ We can view existing users for the database with the command:
 
 	> db.removeUser( theadmin )
 
+####[Rock Mongo](http://code.google.com/p/rock-php/wiki/rock_mongo#Introduction) 
+
+Rock Mongo is the Mongo equivalent for PHPMyAdmin.
+
+Requires 
+
+	$ sudo pecl install mongo
+	>> pecl/mongo is already installed and is the same as the released version 1.1.4
+
+Check the httpd.conf files to confirm we have the correct document root.	
+So apache can read it... 
+
+	$ cd /var/www/html
+	$ wget http://rock-php.googlecode.com/files/rockmongo-v1.1.0.zip
+	$ unzip rockmongo-v1.1.0.zip
+
+	
+
 ####MongoDB NodeJS Modules
 
 Need to do a quick eval of the different [MongoDB NodeJS Modules](https://github.com/joyent/node/wiki/modules#db-nosql-mongo) to confirm which is the fastes/easiest to use.
@@ -447,6 +485,23 @@ Quite simpel... :-)
 	$ su -
 	$ npm install nodemon -g
 
+[MongoDB Native](https://github.com/christkv/node-mongodb-native)
+
+	$ cd node_modules
+	$ git clone git://github.com/christkv/node-mongodb-native
+	
+	Cloning into node-mongodb-native...
+	remote: Counting objects: 4846, done.
+	remote: Compressing objects: 100% (1430/1430), done.
+	remote: Total 4846 (delta 3060), reused 4612 (delta 2847)
+	Receiving objects: 100% (4846/4846), 1.39 MiB | 343 KiB/s, done.
+	Resolving deltas: 100% (3060/3060), done.
+
+	$ cd node-mongodb-native
+	$ make
+	
+
+
 ####[Git Setup](http://help.github.com/linux-set-up-git/)
 
 If you have not yet registered for a [GitHub]() account, what are you wating for? Go to (https://github.com/signup/free)[https://github.com/signup/free] and get your **Free** account! :-)
@@ -503,6 +558,34 @@ On a new computer:
 	$ cd grpwnd
 	$ git remote add tpsorigin git@github.com:grpwnd/grpwnd.git
 
+To Commit/Push:
+	
+	$ git commit -m 'your msg here... :-)'
+	$ git push git@github.com:grpwnd/grpwnd.git master
+
+*or* 
+
+	$ git push tpsorigin master
+
+####[Firewall Ports](http://www.cyberciti.biz/faq/howto-rhel-linux-open-port-using-iptables/)
+
+	$ vi /etc/sysconfig/iptables
+	
+Append your rule:
+
+	$ -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+	
+Restart IP Tables:
+
+	$ /etc/init.d/iptables restart
+
+####[ProtoVis JS Graphics Library](http://vis.stanford.edu/protovis/docs/start.html)
+
+	$ cd /root/node/grpwnd/tps/public
+	$ wget http://protovis-js.googlecode.com/files/protovis-3.2.zip
+	$ unzip protovis-3.2.zip 
+	$ mv protovis-3.2 js
+	$ rm protovis-3.2.zip 
 
 ####LAMP Stack
 
@@ -615,6 +698,8 @@ e.g.
 
 ##Appendix B - Misc Resources
 
+- [Douglas Crockford : Conventions for JavaScript Pogramming](http://javascript.crockford.com/code.html) - 
+
 - [Javascript Namespace Declaration](http://stackoverflow.com/questions/881515/javascript-namespace-declaration) -- essential for keeping code tidy.
 
 - [Javascript Date Basics](http://www.web-source.net/web_development/javascript_date.htm)
@@ -633,6 +718,8 @@ e.g.
 - [StackOverflow Discussion of Best IDE for JS](http://stackoverflow.com/questions/41880/javascript-ides), [With JQuery Support](http://stackoverflow.com/questions/209126/good-javascript-ide-with-jquery-support) and [JSf + HTML](http://stackoverflow.com/questions/187818/any-ides-for-javascript-html) -- I'm using [jedit](http://www.jedit.org/) as its lightweigt, has a file browser and opens each source file in its own window which is good if you have multi-monitor config. :-) -- But another option is [Aptana Studio](http://docs.aptana.com/docs/index.php/Installing_Aptana_on_Linux) which is more feature-rich but I find it a bit slower when running in a VM. if you have a *Native* linux/mac computer with a decent amount of RAM, then Aptana is the way to go.
 
 - Excellent [Object.size method](http://stackoverflow.com/questions/5223/length-of-javascript-associative-array) for determining the size of any object/array in JS. -- I think it might be the *exact* same one as in DC's *The Good Parts*.
+
+- [MongoDB Advanced Queries](http://www.mongodb.org/display/DOCS/Advanced+Queries) -- Essentially I wanted to write a *SELECT dealid WHERE t > 200* query to get all the items younger than 200 minutes. this was writen: *db.things.find({time: {$gt: 200} });* in mongo. Simpel enough.
 
 - [MongoDB Security & Authentication](http://www.mongodb.org/display/DOCS/Security+and+Authentication) - For obvious reasons, we need to ensure a simple level of security. But as we are sharing our code on GitHub we need to remember to change the passwords in production. :-)
 
