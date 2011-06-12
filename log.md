@@ -504,7 +504,7 @@ On a new computer:
 	$ git remote add tpsorigin git@github.com:grpwnd/grpwnd.git
 
 
-####[LAMP](http://en.wikipedia.org/wiki/LAMP_(software_bundle)) Stack
+####LAMP Stack
 
 For when you need to resort to bad habits... [setup tutorial](http://linux.justinhartman.com/Setting_up_a_LAMP_Server)
 
