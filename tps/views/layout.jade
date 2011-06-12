@@ -4,3 +4,11 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body!= body
+    script(type='text/javascript', src='/js/protovis-d3.2.js')
+    script(type='text/javascript')
+      new pv.Panel()
+      .width(150)
+      .height(150)
+      .anchor("center").add(pv.Label)
+      .text("Hello, world!")
+      .root.render();
