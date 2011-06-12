@@ -39,18 +39,20 @@ io.scrape(function() {
 		// var timestamp = Date.now();
 		var fd = '/root/node/grpwnd/tps/crawlie/cache/' +country +'_' +timestamp +'.xml';
 	
-//		fs.writeFile(fd, text, function (err) {
-//			if (err){ 
-//				throw err;
-//                console.log('OOps! Failed to Write File!');
-//			}
-//		});	
-//		this.emit('File saved : ' +fd);
+		fs.writeFile(fd, text, function (err) {
+			if (err){ 
+				throw err;
+                console.log('OOps! Failed to Write File!');
+			}
+		});	
+		this.emit('File saved : ' +fd);
 	}); // end get
 }); //end scrape
 
 var D = new Date(),
-    t = cfn.minofday(D); 
+    t = cfn.minofday(D);
+    d = cfn.dayofyear(D);
+    y = D.getFullYear();
 
 console.log('PARSER - should be object : ' +parser);
 parser.addListener('end', function(r) {
@@ -58,9 +60,13 @@ parser.addListener('end', function(r) {
 	console.log('n :: ' +n);
    	var sales = [];
    	var i = 0;
-  	while(i < n) {
+  	while(i < 15) {
     var deal_id = r['deal'][i]['@']['id'];
     var deal = {           "id": deal_id, 
+                       "title" : r['deal'][i]['@']['title'],
+                            "d": d,
+                            "y": y,
+                       
     		"limited_quantity" : r['deal'][i]['@']['limited_quantity'],
     		"discount_percent" : r['deal'][i]['@']['discount_percent'],
     		 "discount_amount" : r['deal'][i]['@']['discount_amount'],
@@ -81,7 +87,6 @@ parser.addListener('end', function(r) {
                "meta_keywords" : r['deal'][i]['@']['meta_keywords'],       
             "meta_description" : r['deal'][i]['@']['meta_description'],
                   "meta_title" : r['deal'][i]['@']['meta_title'],
-                       "title" : r['deal'][i]['@']['title'],  
                        
                  "parent_city" : r['deal'][i]['city']['@']['parent_city'],
               "facebook_group" : r['deal'][i]['city']['@']['facebook_group'],  
@@ -92,21 +97,24 @@ parser.addListener('end', function(r) {
                    "city_name" : r['deal'][i]['city']['@']['city_name'],
                  "city_status" : r['deal'][i]['city']['@']['status'],
                      "city_id" : r['deal'][i]['city']['@']['id'],
-                    
+                     
                      "country" : r['deal'][i]['city']['country']['@']['shortname'],
                   "country_id" : r['deal'][i]['city']['country']['@']['id'],
                     "currency" : r['deal'][i]['city']['country']['@']['currency'],
      "incentive_reward_amount" : r['deal'][i]['city']['country']['@']['incentive_reward_amount'],
                 "reward_units" : r['deal'][i]['city']['country']['@']['reward_units'],  
-                     
+                                      
                    "type_info" : r['deal'][i]['type']['@']['info'],
                      "type_id" : r['deal'][i]['type']['@']['id'],
                  "status_info" : r['deal'][i]['status']['@']['info'],
-                   "status_id" : r['deal'][i]['status']['@']['id']
-   
-                   };	 
-          console.log('                                      Attempting to RUN DealinDB :: ' +deal.id);
-    	dealindb(deal);
+                   "status_id" : r['deal'][i]['status']['@']['id']       
+                   };	
+                   
+       console.log('   Currency ' +r['deal'][i]['city']['country']['@']['currency'] );
+                  //  "status_id" : r['deal'][i]['city']['@']['id']             
+        console.log('                                      Attempting to RUN DealinDB :: ' +deal.id);
+       console.log(' Country : ' +deal.country +' - country_id : ' +deal.country_id +' - currency : ' +deal.currency );
+       dealindb(deal);
    	
    	sales[i] = {"id": deal_id, 
                 "s" : r['deal'][i]['@']['sold_count'], 
@@ -128,7 +136,7 @@ parser.addListener('end', function(r) {
 
 var dealindb = function (deal) {
    if (deal.id == undefined ) { return false; }
-   db.collection('deals', function(err, collection){
+   db.collection('deals_test', function(err, collection){
       if(err) { 
 		console.log('\n ERROR! :: ' +err +' \n' ); 
       } else { // there was no error finding the collection so we can now .find
@@ -147,21 +155,9 @@ var dealindb = function (deal) {
      }); // end collection	
 } // end function dealindb
 
-var dealinsert = function (deal) {
-   if (deal.id == undefined ) { return false; }
-   db.collection('deals', function(err, collection){
-      if(err) { 
-		console.log('\n ERROR! :: ' +err +' \n' ); 
-      } else { // there was no error finding the collection so we can now .find
-        collection.insert(deal);
-        console.log('                                      Deal Inserted :: ' +deal.id);
-      } // end else
-   }); // end db.col
-} // end function dealindb
-
 var updatesales = function (sales) {
    if (sales.id == undefined ) { return false; }
-   db.collection('sales', function(err, collection){
+   db.collection('sales_test', function(err, collection){
       if(err) { 
 		console.log('\n ERROR! :: ' +err +' \n' ); 
       } else { // there was no error finding the collection so we can now .find
@@ -170,9 +166,12 @@ var updatesales = function (sales) {
    }); // end db.col
 } // end function dealindb
 
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js uk >/dev/null 2>&1
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js ie >/dev/null 2>&1
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js de >/dev/null 2>&1
+
+
+
+// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js uk
+// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js ie
+// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js de
 // */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js fr
 // */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js pt
 // */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js es

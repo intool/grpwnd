@@ -81,3 +81,28 @@ var m = minofday(D);
 
 */
 
+
+
+
+var dealindb = function (sales) {
+	   
+   db.collection('deals', function(err, collection){
+      if(err) { 
+	console.log('\n ERROR! :: ' +err +' \n' ); 
+      } else { // there was no error finding the collection so we can now .find
+        collection.find({"id":sales.id}).toArray(function(err, items){
+          size = cfn.objectsize(items);
+           console.log('    Things in DB :: ' +size ); 
+           console.log('      Items :: ' +items ); 
+	  	  	if (size == undefined || size < 1){
+	    		collection.insert(sales);
+            	console.log('       ' +sales.id +' Inserted into Deals \n');
+	   		 
+	 	 	} else {
+	    		console.log('       ' +sales.id  +' already in DB \n');
+
+	 	 	} // end else  
+		});
+      }
+     }); // end collection	
+} // end function dealindb

@@ -8,9 +8,9 @@
 // Two basic Date 'Conversion' (simplification) functions:
 
 module.exports.dayofyear = function(D) {   // D is a Date object  e.g: var D = new Date();
-//	if (D === undefined || D === false ){
-//	 var D = new Date;	
-//	}
+	if (D == undefined || D === false ){
+	 var D = new Date;	
+	}
 	var yn = D.getFullYear();
 	var mn = D.getMonth();
 	var dn = D.getDate();
