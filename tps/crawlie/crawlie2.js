@@ -1,6 +1,4 @@
 var io = require('/usr/local/lib/node_modules/node.io'),
-    sys = require('sys'),
-    fs = require('fs'),
     xml2js = require('xml2js'),
     cfn = require('./crawl_fn');
 
@@ -25,57 +23,51 @@ console.log('Country :: ' +country);
 
 var D = new Date(),
     t = cfn.minofday(D),
-    timestamp = Date.now(); 
+    timestamp = Date.now(),
+    d = cfn.dayofyear(D),
+    y = D.getFullYear();
 
 var parser = new xml2js.Parser();
 
 io.scrape(function() {	
-	this.get('http://api.groupon.de/api/v1/deals/oftheday/' +country +'/', function(err, text) {
-    			if (err){ 
-					console.log('OOps! Failed to get XML');
-					throw err;
-				}
-		parser.parseString(text);
-		// var timestamp = Date.now();
-		var fd = '/root/node/grpwnd/tps/crawlie/cache/' +country +'_' +timestamp +'.xml';
-	
-		fs.writeFile(fd, text, function (err) {
-			if (err){ 
-				throw err;
-                console.log('OOps! Failed to Write File!');
-			}
-		});	
-		this.emit('File saved : ' +fd);
-	}); // end get
+    this.get('http://api.groupon.de/api/v1/deals/oftheday/' +country +'/', function(err, text) {
+	if (err){ 
+	  console.log('OOps! Failed to get XML');
+	  throw err;
+	}
+	parser.parseString(text);
+    }); // end get
 }); //end scrape
-
-var D = new Date(),
-    t = cfn.minofday(D);
-    d = cfn.dayofyear(D);
-    y = D.getFullYear();
-
 console.log('PARSER - should be object : ' +parser);
+
 parser.addListener('end', function(r) {
     var n = cfn.objectsize(r['deal']);
 	console.log('n :: ' +n);
    	var sales = [];
    	var i = 0;
-  	while(i < 15) {
-    var deal_id = r['deal'][i]['@']['id'];
+  	while(i < n) {
+    var deal_id = r['deal'][i]['@']['id'],
+	   sold = r['deal'][i]['@']['sold_count'],
+	  price = r['deal'][i]['@']['price'];
+	
+	var revenue = sold * price;
+	
     var deal = {           "id": deal_id, 
                        "title" : r['deal'][i]['@']['title'],
                             "d": d,
                             "y": y,
+		            "s": sold,
+		            "r":revenue,
                        
-    		"limited_quantity" : r['deal'][i]['@']['limited_quantity'],
-    		"discount_percent" : r['deal'][i]['@']['discount_percent'],
-    		 "discount_amount" : r['deal'][i]['@']['discount_amount'],
-    		             "url" : r['deal'][i]['@']['url'],  	
-    		 "image_large_url" : r['deal'][i]['@']['image_large_url'],
-    		   "salesforce_id" : r['deal'][i]['@']['salesforce_id'],
+    	    "limited_quantity" : r['deal'][i]['@']['limited_quantity'],
+    	    "discount_percent" : r['deal'][i]['@']['discount_percent'],
+    	     "discount_amount" : r['deal'][i]['@']['discount_amount'],
+                         "url" : r['deal'][i]['@']['url'],  	
+             "image_large_url" : r['deal'][i]['@']['image_large_url'],
+       	       "salesforce_id" : r['deal'][i]['@']['salesforce_id'],
     	  "coupon_valid_until" : r['deal'][i]['@']['coupon_valid_until'],
     	   "coupon_valid_from" : r['deal'][i]['@']['coupon_valid_from'],
-    		             "end" : r['deal'][i]['@']['end'],
+       	                 "end" : r['deal'][i]['@']['end'],
                        "start" : r['deal'][i]['@']['start'],
      "max_number_of_customers" : r['deal'][i]['@']['max_number_of_customers'],
      "min_number_of_customers" : r['deal'][i]['@']['min_number_of_customers'],
@@ -109,22 +101,21 @@ parser.addListener('end', function(r) {
                  "status_info" : r['deal'][i]['status']['@']['info'],
                    "status_id" : r['deal'][i]['status']['@']['id']       
                    };	
-                   
-       console.log('   Currency ' +r['deal'][i]['city']['country']['@']['currency'] );
-                  //  "status_id" : r['deal'][i]['city']['@']['id']             
+           
         console.log('                                      Attempting to RUN DealinDB :: ' +deal.id);
        console.log(' Country : ' +deal.country +' - country_id : ' +deal.country_id +' - currency : ' +deal.currency );
        dealindb(deal);
    	
    	sales[i] = {"id": deal_id, 
-                "s" : r['deal'][i]['@']['sold_count'], 
-               "t"  : cfn.minofday(D) };	 
+		    "s" : sold, 
+		   "t"  : t,
+		    "r" : revenue };	 	 
    
     updatesales(sales[i]);
     console.log('Deal ID [' +deal_id +'] Sold: ' +sales[i].s  +' \n'); 
 	
-   i++;
-   } // end while
+	i++;
+	} // end while
    console.log('Done. WORK!! ' +url); //    
     
 });
@@ -136,28 +127,22 @@ parser.addListener('end', function(r) {
 
 var dealindb = function (deal) {
    if (deal.id == undefined ) { return false; }
-   db.collection('deals_test', function(err, collection){
+   db.collection('deals', function(err, collection){
       if(err) { 
 		console.log('\n ERROR! :: ' +err +' \n' ); 
-      } else { // there was no error finding the collection so we can now .find
-        collection.find({"id":deal.id}).toArray(function(err, items){
-          size = cfn.objectsize(items);  
-          // console.log('                        ' +deal.id +' :: ' +size ); 
-	  	  	if (size == undefined || size < 1) {
-	  	  		collection.insert(deal);
-            	return size; // deal is NOT in the db
-	 	 	} else {
-	 	 		console.log('The deal is already in the DB :-) just update sales... ');
-				return true; // the deal is present in the DB
-	 	 	} // end else  
-		}); // end find
+      } else {
+	collection.update({"id":deal.id}, {$set:deal}, {safe:true, upsert:true},
+           function(err) {
+	      if (err) console.warn(err.message);
+	      else console.log('successfully updated :: ' +deal.id);
+	});
       }
-     }); // end collection	
+   }); // end collection	
 } // end function dealindb
 
 var updatesales = function (sales) {
    if (sales.id == undefined ) { return false; }
-   db.collection('sales_test', function(err, collection){
+   db.collection('sales', function(err, collection){
       if(err) { 
 		console.log('\n ERROR! :: ' +err +' \n' ); 
       } else { // there was no error finding the collection so we can now .find
@@ -165,19 +150,3 @@ var updatesales = function (sales) {
       } // end else
    }); // end db.col
 } // end function dealindb
-
-
-
-
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js uk
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js ie
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js de
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js fr
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js pt
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js es
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js nl
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js it
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js at
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js se
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js ro
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js pl

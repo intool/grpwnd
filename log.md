@@ -326,6 +326,40 @@ So:
 
 	$ sudo apt-get install mongodb
 
+######[Mongo on Centos](http://www.mongodb.org/display/DOCS/CentOS+and+Fedora+Packages#comment-223300873)
+
+	$ vi /etc/yum.repos.d/10gen.repo
+
+Paste:
+
+	[10gen]
+	name=10gen Repository
+	baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/i686
+	gpgcheck=0
+
+Uninstall Previous:
+
+	$ rpm -q mongodb
+	>> mongodb-1.6.4-1.el5
+	$  ps -ef | grep mongo
+		root     29129     1  0 Jun12 ?        00:02:19 /usr/bin/mongod
+	$ kill -9 29129
+	$ cd /data
+	$ cp -R db db_BAK
+
+	$ yum remove mongodb mongodb-server 
+	Removing:
+ 		mongodb                i386    1.6.4-1.el5   installed
+ 		mongodb-server         i386    1.6.4-1.el5   installed
+	
+		Removed:   mongodb.i386 0:1.6.4-1.el5  mongodb-server.i386 0:1.6.4-1.el5
+		Complete!
+
+10-Gen Version:
+	
+	$ yum install mongo-10gen mongo-10gen-server
+
+
 #####Starting Up
 
 To start the MongoDatabase server, type this command:
@@ -725,9 +759,40 @@ e.g.
 
 - [MongoDB Command Line Parameters](http://www.mongodb.org/display/DOCS/Command+Line+Parameters) a good list of all the options you can pass into the **mongod** command to specify a diff port, data dir or mem cache.
 
+	> db.sales.find().sort({s:-1})
+	error: { "$err" : "too much data for sort() with no index", "code" : 10129 }
+
+- [MongoDB Indexes](http://www.mongodb.org/display/DOCS/Indexes) -- I was trying to query mongo but got an error! So had to add an index to the id
+
+Before:
+
+	> db.deals.getIndexes()
+	[
+	   	{
+			"name" : "_id_",
+			"ns" : "mydb.deals",
+			"key" : {
+			"_id" : 1
+			}
+		}
+	]
+
+Run:
+
+	db.deals.ensureIndex({id:1});
+	db.deals.ensureIndex({s:1});
+	db.deals.ensureIndex({city_name:1},{city_id:1},{country:1});
+	db.sales.ensureIndex({id:1});
+	db.sales.ensureIndex({s:1});
+	db.sales.ensureIndex({r:1});
+	db.sales.ensureIndex({t:1});
+
+- [Updating in Mongodb](http://www.mongodb.org/display/DOCS/Updating) -- See **UpSert** :-)
+
+
 - [Node JS Event Emiters and Callbacks](http://howtonode.org/control-flow-part-ii) - Read up if you are having issues understanding the diference.
 
-- [Getting started with Node.io](https://github.com/chriso/node.io/wiki/Getting-Started) - The Wiki for the project.
+- [Getting started with Node.io](https://github.com/chriso/node.io/wiki/Getting-Started) - The Wiki for the project. - [Another Article](http://www.coderholic.com/scraping-the-web-with-node-io/)
 
 - [Good introduction to Global Variables in JS](http://snook.ca/archives/javascript/global_variable) - If you have not yet read *"The Good Parts"* by DC then this will be a good primer. 
 

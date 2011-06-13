@@ -33,7 +33,7 @@ app.configure('production', function(){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'TPS [Transactions Per Second]'
+    title: 'UPDATED ON WINDOWS TPS [Transactions Per Second]'
   });
 });
 

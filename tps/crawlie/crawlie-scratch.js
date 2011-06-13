@@ -106,3 +106,47 @@ var dealindb = function (sales) {
       }
      }); // end collection	
 } // end function dealindb
+
+// old dealindb:
+
+var dealindb = function (deal) {
+   if (deal.id == undefined ) { return false; }
+   db.collection('deals_test', function(err, collection){
+      if(err) { 
+		console.log('\n ERROR! :: ' +err +' \n' ); 
+      } else { // there was no error finding the collection so we can now .find
+        collection.find({"id":deal.id}).toArray(function(err, items){
+          size = cfn.objectsize(items);  
+          // console.log('                        ' +deal.id +' :: ' +size ); 
+	  if (size == undefined || size < 1) {
+	      collection.insert(deal);
+	      
+	      
+	      
+            	return size; // deal is NOT in the db
+	 	 	} else {
+	 	 		console.log('The deal is already in the DB :-) just update sales... ');
+				return true; // the deal is present in the DB
+	 	 	} // end else  
+		}); // end find
+      }
+     }); // end collection	
+} // end function dealindb
+
+// NEW:
+
+var dealindb = function (deal) {
+   if (deal.id == undefined ) { return false; }
+   db.collection('deals_test', function(err, collection){
+      if(err) { 
+		console.log('\n ERROR! :: ' +err +' \n' ); 
+      } else { // there was no error finding the collection so we can now .find
+             // collection.update({"id":deal.id},{$set: deal });
+	      collection.update({"id":deal.id}, {$set:deal}, {safe:true},
+                    function(err) {
+		      if (err) console.warn(err.message);
+		      else console.log('successfully updated');
+	      });
+      }
+     }); // end collection	
+} // end function dealindb
