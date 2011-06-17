@@ -62,7 +62,7 @@ Run:
 
 	$ node crawlie.js
 
-it works.
+it works!!
 Now lets setup **CRON** to run it every minute:
 
 	$ crontab -e
@@ -76,7 +76,12 @@ Ok so we are slurping in the raw html/xml data now we need to parse it.
 	$ which mongod
 	> /usr/bin/mongod
 	$ nohup /usr/bin/mongod &
+
+[Starting as a Deamon](http://www.mongodb.org/display/DOCS/Starting+and+Stopping+Mongo#StartingandStoppingMongo-RunningasaDaemon)
+
+	$ /usr/bin/mongod --fork --logpath /var/log/mongodb.log --logappend
 	
+	$ nohup /usr/local/bin/node /root/node/grpwnd/tps/app-test.js &
 
 ######[Time Zone Change]
 
@@ -621,6 +626,10 @@ Restart IP Tables:
 	$ mv protovis-3.2 js
 	$ rm protovis-3.2.zip 
 
+####[FLOT JQuery Graphing Lib](http://vis.stanford.edu/protovis/docs/start.html)
+
+[README](http://flot.googlecode.com/svn/trunk/README.txt)
+
 ####LAMP Stack
 
 For when you need to resort to bad habits... [setup tutorial](http://linux.justinhartman.com/Setting_up_a_LAMP_Server)
@@ -732,6 +741,8 @@ e.g.
 
 ##Appendix B - Misc Resources
 
+###Javascript
+
 - [Douglas Crockford : Conventions for JavaScript Pogramming](http://javascript.crockford.com/code.html) - 
 
 - [Javascript Namespace Declaration](http://stackoverflow.com/questions/881515/javascript-namespace-declaration) -- essential for keeping code tidy.
@@ -752,6 +763,45 @@ e.g.
 - [StackOverflow Discussion of Best IDE for JS](http://stackoverflow.com/questions/41880/javascript-ides), [With JQuery Support](http://stackoverflow.com/questions/209126/good-javascript-ide-with-jquery-support) and [JSf + HTML](http://stackoverflow.com/questions/187818/any-ides-for-javascript-html) -- I'm using [jedit](http://www.jedit.org/) as its lightweigt, has a file browser and opens each source file in its own window which is good if you have multi-monitor config. :-) -- But another option is [Aptana Studio](http://docs.aptana.com/docs/index.php/Installing_Aptana_on_Linux) which is more feature-rich but I find it a bit slower when running in a VM. if you have a *Native* linux/mac computer with a decent amount of RAM, then Aptana is the way to go.
 
 - Excellent [Object.size method](http://stackoverflow.com/questions/5223/length-of-javascript-associative-array) for determining the size of any object/array in JS. -- I think it might be the *exact* same one as in DC's *The Good Parts*.
+
+- [How to get selected value of dropdownlist using JavaScript?](http://stackoverflow.com/questions/1085801/how-to-get-selected-value-of-dropdownlist-using-javascript/1085810#1085810)
+
+- [Jquery $.getScript to fet the client-side JS post-load](http://stackoverflow.com/questions/912711/jquery-to-load-javascript-file-dynamically/912713#912713)
+
+	$('#add_comment').click(function() {
+		if(typeof TinyMCE == "undefined") {
+			$.getScript('tinymce.js', function() {
+				TinyMCE.init();
+			});
+		}
+	});
+
+- [How to sort a JSON array ?](http://stackoverflow.com/questions/979256/how-to-sort-a-json-array)
+
+	data = [{"id":"9","name":"London"},{"id":"10","name":"Birmingham"},{"id":"11","name":"Manchester"},{"id":"12","name":"Sheffield"}];
+
+We need to sort the JSON by the name of the city to build the menu alphabetically:
+	
+	var sort_by = function(field, reverse, primer){
+		   reverse = (reverse) ? -1 : 1;
+		   return function(a,b){
+			   a = a[field];
+			   b = b[field];
+			   if (typeof(primer) != 'undefined'){
+				   a = primer(a);
+				   b = primer(b);
+			   }
+			   if (a<b) return reverse * -1;
+			   if (a>b) return reverse * 1;
+			   return 0;
+		   }
+		}
+	data.sort(sort_by('name', false, function(a){return a.toUpperCase()}));
+
+###Node JS
+
+- Superb [introduction to NodeJS ](http://www.edvanbeinum.com/nodejs-introduction-part-1) by [@edvanbeinum](http://twitter.com/#!/edvanbeinum) -- Highlights >>
+	- 
 
 - [MongoDB Advanced Queries](http://www.mongodb.org/display/DOCS/Advanced+Queries) -- Essentially I wanted to write a *SELECT dealid WHERE t > 200* query to get all the items younger than 200 minutes. this was writen: *db.things.find({time: {$gt: 200} });* in mongo. Simpel enough.
 
@@ -789,13 +839,53 @@ Run:
 
 - [Updating in Mongodb](http://www.mongodb.org/display/DOCS/Updating) -- See **UpSert** :-)
 
-
 - [Node JS Event Emiters and Callbacks](http://howtonode.org/control-flow-part-ii) - Read up if you are having issues understanding the diference.
+
+- [Deploying Node.js With Upstart and Monit](http://howtonode.org/deploying-node-upstart-monit) - Shows how to keep nodejs server alive... :-)
 
 - [Getting started with Node.io](https://github.com/chriso/node.io/wiki/Getting-Started) - The Wiki for the project. - [Another Article](http://www.coderholic.com/scraping-the-web-with-node-io/)
 
 - [Good introduction to Global Variables in JS](http://snook.ca/archives/javascript/global_variable) - If you have not yet read *"The Good Parts"* by DC then this will be a good primer. 
 
+- [Remove null from array](http://stackoverflow.com/questions/281264/remove-empty-elements-from-an-array-in-javascript) -- When querying the db It returned several
+   results for the same city. If our mongodb driver included all the [aggregation functions](http://www.mongodb.org/display/DOCS/Aggregation) from the cli e.g. db.collect.destinct() or db.runCommand etc 
+   it would be easy to select 
+   destinct values... but without that facility we need to return the large dataset and 
+
+
+###Browser (IE) Issues:
+
+- [Z-index Bug in IE](http://brenelz.com/blog/squish-the-internet-explorer-z-index-bug/) -- I was trying to get the logo to float above the header/nav.
+The absolutely positioned div had a z-index of 1000, but @jorenrapini pointed out that IE doesn’t use z-index properly. 
+came across [this quirksmode.org article](http://www.quirksmode.org/bugreports/archives/2006/01/Explorer_z_index_bug.html) that explained the flaw in detail:
+“In Internet Explorer positioned elements generate a new stacking context, starting with a z-index value of 0. Therefore z-index doesn’t work correctly”
+
+The above article does not directly contain a workaround but in the comments a fellow said the following:
+
+*giving the parent element a higher z-index actual fixes the bug*
+
+I then used the following code on my site:
+
+<div style="position: relative; z-index: 3000">
+    <div style="position:absolute;z-index:1000;">
+        <a href="#">Page</a>
+        ...
+    </div>
+</div>
+<img style="position:absolute" src="myimage.png" />
+This gave me the result I was looking for.
+
+###To Orgainse:
+
+- [ABC Ordered List HTML](http://stackoverflow.com/questions/862878/make-abc-ordered-list-items-have-bold-style)
+
+	<ol type="A">
+	  <li>List Item 1</li>
+	  <li>List Item 2</li>
+	</ol>
+   
+
+- [CSS Positioning](http://www.barelyfitz.com/screencast/html-training/css/positioning/) if you're having position problems I feel bad for you son...
 
 -------
 
@@ -804,4 +894,13 @@ Run:
 
 - [Monkey.org Crawl](http://monkey.org/~provos/crawl/) utility starts a depth-first traversal of the web at the specified URLs. It stores all JPEG images that match the configured constraints. Crawl is fairly fast and allows for graceful termination. After terminating crawl, it is possible to restart it at exactly the same spot where it was terminated. Crawl keeps a persistent database that allows multiple crawls without revisiting sites. -- ** Look into when building a more feature-rich crawler **
 
-- 
+- [Jquery Validaty](http://plugins.jquery.com/project/validity) - Client-side Validation
+
+- **incomplete**! Install Latest Firefox on Debian/Ubuntu]
+  first check out the [system requirements](http://www.mozilla.com/en-US/firefox/system-requirements.html)
+  a few things to install: [GTK+]() [GLib]() [Pango]() [X.Org]() [libstdc++ ]() [NetworkManager 0.7]() [DBus]()  [HAL]() [GNOME]()
+
+	$ sudo aptitude install gnome-core-devel build-essential
+	$ echo 'deb http://mozilla.debian.net/ squeeze-backports iceweasel-4.0' >> /etc/apt/sources.list
+	$ apt-get install -t squeeze-backports iceweasel
+	$ /usr/bin/firefox
