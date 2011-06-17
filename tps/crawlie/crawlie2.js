@@ -25,6 +25,7 @@ var D = new Date(),
     t = cfn.minofday(D),
     timestamp = Date.now(),
     d = cfn.dayofyear(D),
+    w = Math.ceil(d/7),
     y = D.getFullYear();
 
 var parser = new xml2js.Parser();
@@ -55,6 +56,7 @@ parser.addListener('end', function(r) {
     var deal = {           "id": deal_id, 
                        "title" : r['deal'][i]['@']['title'],
                             "d": d,
+			    "w": w,
                             "y": y,
 		            "s": sold,
 		            "r":revenue,
@@ -86,7 +88,7 @@ parser.addListener('end', function(r) {
                    "longitude" : r['deal'][i]['city']['@']['longitude'],
                     "latitude" : r['deal'][i]['city']['@']['latitude'],
                     "city_url" : r['deal'][i]['city']['@']['url'],
-                   "city_name" : r['deal'][i]['city']['@']['city_name'],
+                   "city_name" : r['deal'][i]['city']['@']['name'],
                  "city_status" : r['deal'][i]['city']['@']['status'],
                      "city_id" : r['deal'][i]['city']['@']['id'],
                      
@@ -109,6 +111,7 @@ parser.addListener('end', function(r) {
    	sales[i] = {"id": deal_id, 
 		    "s" : sold, 
 		   "t"  : t,
+		    "ts": timestamp,
 		    "r" : revenue };	 	 
    
     updatesales(sales[i]);

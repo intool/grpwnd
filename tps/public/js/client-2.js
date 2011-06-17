@@ -1,3 +1,39 @@
+$(document).ready(function() {
+	var country = window.location.pathname.split("/")[1];
+	$('#city-select-box').change(function() {
+		var city = $('#city-select-box').find(':selected').val(); // get id from select
+		$('#city-select').html('<img src="/img/ajax-loader.gif">');
+		location.href = '/' +country + '/' +city; // send to city
+	}); // end change event watcher testy
+
+	// build & select the city list client side :-)
+	$.getJSON('/js/citylist_UK.json', function(data) {
+		var sort_by = function(field, reverse, primer){
+		   reverse = (reverse) ? -1 : 1;
+		   return function(a,b){
+			   a = a[field];
+			   b = b[field];
+			   if (typeof(primer) != 'undefined'){
+				   a = primer(a);
+				   b = primer(b);
+			   }
+			   if (a<b) return reverse * -1;
+			   if (a>b) return reverse * 1;
+			   return 0;
+		   }
+		}
+		data.sort(sort_by('name', false, function(a){return a.toUpperCase()}));
+		$.each(data, function(key, val) {
+			$('#city-select-box').append('<option value="' + val.id + '">' + val.name + '</option>');
+		});
+		var c = window.location.pathname.split("/")[2];
+		document.getElementById("city-select-box").value = c;
+		$('#city-select').fadeIn(300);	
+	});
+
+	
+	
+	
 $(function () {
     // we use an inline data source in the example, usually data would
     // be fetched from a server
@@ -56,3 +92,5 @@ $(function () {
  
     update();
 });
+
+}); // end doc.ready

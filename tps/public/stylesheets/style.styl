@@ -1,6 +1,7 @@
 body
-  padding 50px
   font 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  background: url(http://static.uk.groupon-content.net/s/v/cb2364473348/images/layout/site_bg_rays2.jpg) 
+  margin: 0px;
 a
   color #00B7FF
   
@@ -10,15 +11,81 @@ a
 }
 
 #placeholder
+  margin-top:200px;
   width:600px;
   height:300px;
 
-
-body {
-  margin: 0;
-  background-color: #eee;
+#header {
+  // background-color: #343434;
+  width:100%;
+  background: url("http://static.uk.groupon-content.net/s/v/cb448989775/images/layout/header_bg_sprite.png") repeat-x scroll left -206px #343434;
+  height: 52px;
+  margin-top: 0px;
+  z-index:300;
+  position:fixed
 }
 
+.logo
+  height 100px;
+  z-index:100;
+  top:0px;
+  left:1px;
+  position: fixed;
+
+div#city-select {
+  color: white
+  position:fixed;
+  top:6px;
+  right:20px;
+  // padding-top: 7px
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+#city-select-box {
+  background-color: white;
+  margin-top: 4px
+  padding-left: 4px;
+  width: 240px;
+  height: 32px
+  font-size: 1em;
+  font-weight: bold;
+  // border: 1px solid #999999;
+   -webkit-border-radius:4px;
+   -moz-border-radius:4px;
+   border-radius:4px;
+}
+
+#city-select-label {
+  margin-top: -30px;
+}
+
+.boxContentMain {
+   background-color: #FFFFFF;
+   margin -0px auto 30px auto;
+   width: 932px
+   /* border:1px solid #dfdfdf; */
+   border: 2px solid #76A045;
+   -webkit-border-radius:8px;
+   -moz-border-radius:8px;
+   border-radius:8px;
+   /* -moz-box-shadow:0px 0px 13px #d0d0d0;
+   -webkit-box-shadow:0px 0px 13px #d0d0d0;
+   box-shadow:0px 0px 13px #d0d0d0; */
+}
+.display {
+   padding 0px 20px 20px 20px;
+   min-height: 100px;
+   // z-index:500;
+   width: 200px;
+   position:relative;
+   
+}
+
+.hide
+  display:none;
+
+/*
 a {
   color: #7375b5;
   text-decoration: none;
@@ -218,3 +285,4 @@ iframe {
     border-bottom: none;
   }
 }
+*/

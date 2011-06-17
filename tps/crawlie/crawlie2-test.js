@@ -1,6 +1,4 @@
 var io = require('/usr/local/lib/node_modules/node.io'),
-    sys = require('sys'),
-    fs = require('fs'),
     xml2js = require('xml2js'),
     cfn = require('./crawl_fn');
 
@@ -27,6 +25,7 @@ var D = new Date(),
     t = cfn.minofday(D),
     timestamp = Date.now(),
     d = cfn.dayofyear(D),
+    w = Math.ceil(d/7),
     y = D.getFullYear();
 
 var parser = new xml2js.Parser();
@@ -40,15 +39,6 @@ io.scrape(function() {
 		parser.parseString(text);
 		// var timestamp = Date.now();
 		var fd = '/root/node/grpwnd/tps/crawlie/cache/' +country +'_' +timestamp +'.xml';
-	/*
-		fs.writeFile(fd, text, function (err) {
-			if (err){ 
-				throw err;
-                console.log('OOps! Failed to Write File!');
-			}
-		});	
-		this.emit('File saved : ' +fd);
-	*/
 	}); // end get
 }); //end scrape
 
@@ -67,6 +57,7 @@ parser.addListener('end', function(r) {
     var deal = {           "id": deal_id, 
                        "title" : r['deal'][i]['@']['title'],
                             "d": d,
+			    "w": w,
                             "y": y,
 		            "s": sold,
 		            "r":revenue,
@@ -123,6 +114,7 @@ parser.addListener('end', function(r) {
    	sales[i] = {"id": deal_id, 
                     "s" : sold, 
                     "t" : t,
+		   "ts": timestamp,
 		    "r" : revenue };	 
    
     updatesales(sales[i]);
@@ -150,7 +142,7 @@ var dealindb = function (deal) {
 	      if (err) console.warn(err.message);
 	      else console.log('successfully updated :: ' +deal.id);
 	});
-      }
+     }
    }); // end collection	
 } // end function dealindb
 
@@ -165,18 +157,3 @@ var updatesales = function (sales) {
    }); // end db.col
 } // end function dealindb
 
-
-
-
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js uk
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js ie
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js de
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js fr
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js pt
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js es
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js nl
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js it
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js at
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js se
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js ro
-// */1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie-write-db.js pl

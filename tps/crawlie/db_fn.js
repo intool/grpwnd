@@ -1,4 +1,6 @@
 /******* Crawlie Function Library! ****/
+ cfn = require('./crawl_fn');
+
 
  function is_string(input){
     return typeof(input)=='string' && isNaN(input);
@@ -78,4 +80,29 @@ module.exports.topdeals = function (limit) {
      }); // end collection	
 } // end function dealindb
 
-// printjson(db.deals.findOne({}))
+module.exports.dealbycity = function (){ 
+var mongo = require("node-mongodb-native");
+
+var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
+var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : mongo.Connection.DEFAULT_PORT;
+db   = new mongo.Db('mydb', new mongo.Server(host, port, {}), {});
+console.log('DB :: ' +db);
+   if (limit == undefined ) { limit = 10; }
+   db.collection('deals', function(err, collection){
+      if(err) { 
+		console.log('\n ERROR! :: ' +err +' \n' ); 
+      } else { // there was no error finding the collection so we can now .find
+        collection.find().sort({s:-1}).limit(limit).toArray(function(err, items){
+          size = cfn.objectsize(items);  
+          console.log('                        '  +' :: ' +size ); 
+	  	  	if (size == undefined || size < 1) {
+	  	  		// collection.insert(deal);
+            	return size; // deal is NOT in the db
+	 	 	} else {
+	 	 		console.log('The deal is already in the DB :-) just update sales... ');
+				return true; // the deal is present in the DB
+	 	 	} // end else  
+		}); // end find
+      }
+     }); // end collection	
+} // end fn dealbycity

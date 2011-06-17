@@ -150,3 +150,46 @@ var dealindb = function (deal) {
       }
      }); // end collection	
 } // end function dealindb
+
+
+      if(err) { 
+	console.log('\n ERROR! :: ' +err +' \n' ); 
+      } else { // there was no error finding the collection so we can now .find
+        collection.find({"id":deal.id}).toArray(function(err, items){
+          size = cfn.objectsize(items);
+	     console.log(deal.id +'    Things in DB :: ' +items ); 
+//           console.log('      Items :: ' +items ); 
+	  if (size == undefined || size < 1){
+//	    collection.insert(deal_array);
+//            console.log('       ' +deal_id +' Inserted into Deals \n');
+	    db.close();
+	  } else {
+	    console.log('       ' +deal.id  +' already in DB \n');
+	    db.close();
+	  }
+	  
+	  
+	});
+      }
+	  
+	  
+// before it got messy...
+function getcities(country) { return function (callback, err) {
+  // Use nextTick to prove that we're working asynchronously
+  process.nextTick(function () {
+    if (country === 'IE') {
+      err(new Error("Country needs to be UK"));
+    } else {
+      callback(
+	   ' Callback Says Country is ' +country +'\n' 
+	   
+	  );
+    }
+  }); // end nextTick
+}}
+
+getcities(country)(function (result) {
+  console.log("the result is " + result);
+}, function (error) {
+  throw error;
+});

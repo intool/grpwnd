@@ -33,22 +33,41 @@ app.configure('production', function(){
 
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'UPDATED ON WINDOWS TPS [Transactions Per Second]'
+    title: 'TPS [Transactions Per Second]'
   });
 });
 
 app.get('/test', function(req, res){
 
-
 var D = new Date(),
-d = cfn.dayofyear(D);
-t = cfn.minofday(D);
+d = cfn.dayofyear(D),
+t = cfn.minofday(D),
+city =  req.params.city;
+if(!city || city == undefined) { var city = 'London'; }
+
   res.render('test', {
-    title: 'KATE 2	: Test [Transactions Per Second] : ' +d +' > ' +t,
-    city: 'London'
+    title: '[Transactions Per Second] : ' +d +' > ' +t,
+    city: city
   });
 
 });
+
+app.get('/uk/:city', function(req, res){
+	
+var D = new Date(),
+d = cfn.dayofyear(D),
+t = cfn.minofday(D),
+city =  req.params.city;
+citylist = { '0':'London', '1':'Manchester', '2':'Leeds', '3':'Oxford', '4':'Edinburgh' };
+  res.render('test', {
+    title: city,
+    city: city,
+	citylist: citylist
+  });
+
+});
+
+
 
 app.listen(80);
 console.log("Express server listening on port %d", app.address().port);

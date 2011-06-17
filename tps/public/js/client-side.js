@@ -56,3 +56,10 @@ $(function () {
  
     update();
 });
+
+function cityselect(){
+  var e = document.getElementById("city-select-box");
+  var city = e.options[e.selectedIndex].value;
+  console.log('You Selected : : ' +city);
+  location.href = "/city/" +city; // send the client to the appropriate city
+};
