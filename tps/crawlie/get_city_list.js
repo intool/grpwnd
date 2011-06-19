@@ -7,6 +7,7 @@ var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NO
 var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : mongo.Connection.DEFAULT_PORT;
 var db   = new mongo.Db('mydb', new mongo.Server(host, port, {}), {});
 
+
 // this writes the city list to a JSON file :-)
 function getcitylist(country){
   console.log('getcitylist called for :: ' +country);
@@ -47,7 +48,7 @@ db.open(function(err, db){
 		console.log('Citylist JSON :: ' +json);
 		console.log('Citylist :: ' +cfn.objectsize(citylist));
    
-   		var fd = '/root/node/grpwnd/tps/public/js/' +'citylist_' +country +'.json';
+   		var fd = '/root/node/grpwnd/tps/public/json_cache/' +'citylist_' +country +'.json';
 
 		fs.writeFile(fd, json, function (err) {
 			if (err){ 
@@ -75,6 +76,12 @@ db.open(function(err, db){
 country = 'UK';
 citylist = getcitylist(country);
 
+
+
+
+
+
+// need to work on automating this once the UK is demo'd :-)
 var countries = ["UK","FR","DE","IE"];
 var get = [];
 for (var i = 0; i < countries.length; i++) {
@@ -103,8 +110,3 @@ for (var i = 0; i < countries.length; i++) {
 		return newArray;
 	} // end fun cleanArray
 
-	
-
-setTimeout(function () {
-   db.close();
-   }, 2000);

@@ -283,7 +283,7 @@ Please note this installation is **Specific** to **Debian/Ubuntu** Linux! Visit 
 	$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 
 Now add this line to your sources: 
-
+	$ vi /etc/apt/sources.list
 	deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
 
 Then run:
@@ -484,7 +484,7 @@ Certainly full featured...
 
 Install:
 
-	$ git clone https://github.com/christkv/node-mongodb-native
+	$ git clone git://github.com/christkv/node-mongodb-native
 	$ cd node-mongodb-native
 	$ make
 
@@ -797,6 +797,19 @@ We need to sort the JSON by the name of the city to build the menu alphabeticall
 		   }
 		}
 	data.sort(sort_by('name', false, function(a){return a.toUpperCase()}));
+	
+- [Google Chrome Fram](http://www.chromium.org/developers/how-tos/chrome-frame-getting-started) - The **Holy Grail** of Web Development!
+*Finally* we can **forget internet explorer** and focus on developing cool stuff! At least that this the hope...
+
+simply include the following meta tag in your html>head:
+
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+and add the script to initialise the Chrome Frame:
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+
+And the code-masters at google wipe away our IE worries! :-)
 
 ###Node JS
 
@@ -851,6 +864,14 @@ Run:
    results for the same city. If our mongodb driver included all the [aggregation functions](http://www.mongodb.org/display/DOCS/Aggregation) from the cli e.g. db.collect.destinct() or db.runCommand etc 
    it would be easy to select 
    destinct values... but without that facility we need to return the large dataset and 
+
+###Linux:
+
+- Check version of Linux from command line:
+
+	$ uname -a
+	>> Linux 94-136-54-46 2.6.18-028stab089.1 #1 SMP Thu Apr 14 13:46:04 MSD 2011 x86_64 GNU/Linux  [ubuntu]
+	>> 2.6.16-xenU #1 SMP Mon May 28 03:41:49 SAST 2007 i686 i686 i386 GNU/Linux                    [centos]
 
 
 ###Browser (IE) Issues:

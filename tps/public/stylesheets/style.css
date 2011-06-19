@@ -10,11 +10,6 @@ a {
   width: 430px;
   height: 225px;
 }
-#placeholder {
-  margin-top: 200px;
-  width: 600px;
-  height: 300px;
-}
 #header {
   width: 100%;
   background: url("http://static.uk.groupon-content.net/s/v/cb448989775/images/layout/header_bg_sprite.png") repeat-x scroll left -206px #343434;
@@ -53,20 +48,109 @@ div#city-select {
 #city-select-label {
   margin-top: -30px;
 }
-.boxContentMain {
-  background-color: #fff;
+#canvas {
+  background-color: #ccc;
   margin: 0px auto 30px auto;
   width: 932px;
   border: 2px solid #76a045;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
+  -moz-box-shadow: 0px 0px 6px #333;
+  -webkit-box-shadow: 0px 0px 6px #333;
+  box-shadow: 0px 0px 13px #333;
+  display: none;
 }
-.display {
-  padding: 0px 20px 20px 20px;
-  min-height: 100px;
-  width: 200px;
+#deals {
+  margin-top: 70px;
+}
+.deal {
+  background-color: #fff;
+  margin: 10px;
+  padding: 10px 10px 10px 10px;
+  border: 2px solid #76a045;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -moz-box-shadow: 0px 0px 6px #333;
+  -webkit-box-shadow: 0px 0px 6px #333;
+  color: #036;
+}
+.deal small {
+  float: left;
+  font-size: 0.7em;
+  margin-left: 20px;
+}
+.dinfo {
+  width: 612px;
+  float: right;
   position: relative;
+}
+.dimg {
+  width: 320px;
+  float: left;
+}
+.dtitle {
+  width: 260px;
+  padding: 0px 5px;
+  float: left;
+  margin-left: 20px;
+}
+.tbls {
+  width: 260px;
+  position: relative;
+}
+table.results {
+  margin-bottom: 4px;
+  width: 260px;
+  font-weight: bold;
+  text-align: center;
+  color: #003;
+  border: 2px solid #8bd3f6;
+  background-color: #cfeef6;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+table.orange {
+  border-color: #fc0;
+  background-color: #ffe699;
+  color: #f60;
+}
+table.orange .res_hdr {
+  background-color: #fc0;
+}
+.col1-or {
+  border-right: 2px solid #fc0;
+  width: 120px;
+}
+table.green {
+  border: 2px solid #88b455;
+  background-color: #d1ffb3;
+  color: #030;
+}
+table.green .res_hdr {
+  background-color: #88b455;
+}
+table.green .col1 {
+  border-right: 2px solid #88b455;
+}
+table.results tr td {
+  padding: 4px;
+}
+.res_hdr {
+  height: 25px;
+  margin: 8px;
+  font-size: 1.3em;
+  background-color: #8bd3f6;
+}
+.res_lrg {
+  padding: 10px;
+  font-size: 1.6em;
+}
+.col1 {
+  border-right: 2px solid #8bd3f6;
+  width: 120px;
 }
 .hide {
   display: none;

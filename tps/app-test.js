@@ -53,19 +53,34 @@ if(!city || city == undefined) { var city = 'London'; }
 });
 
 app.get('/uk/:city', function(req, res){
-	
-var D = new Date(),
-d = cfn.dayofyear(D),
-t = cfn.minofday(D),
+
+  res.header('Cache-Control', 'no-cache');
+  res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');	
+
 city =  req.params.city;
-citylist = { '0':'London', '1':'Manchester', '2':'Leeds', '3':'Oxford', '4':'Edinburgh' };
-  res.render('test', {
-    title: city,
-    city: city,
-	citylist: citylist
+
+  res.render('city', {
+    title: city
   });
 
+
 });
+
+app.get('/refresh/:city', function(req, res){
+
+  res.header('Cache-Control', 'no-cache');
+  res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');	
+
+city =  req.params.city;
+  res.render('city', {
+    title: city,
+  });
+
+var gdc = require('./crawlie/get_deals_for_city');
+gdc.getdeals(city);
+
+});
+
 
 
 
