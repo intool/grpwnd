@@ -20,6 +20,7 @@ if ( city_id == undefined || city_id == null || isNaN(city_id) ) {
   // citylist = [{ id:10000, name : '' }],
          D = new Date(),
 	     d = cfn.dayofyear(D),
+		 m = cfn.minofday(D),
 	     city_id_string = String(city_id);
 
 db.open(function(err, db){
@@ -37,7 +38,7 @@ db.open(function(err, db){
 	      cursor.toArray(function(err, docs) {
 // 			console.log('   Docs Length :: ' +docs.length +'  -  ' +docs +'\n');
 			var total = docs.forEach(function(doc) {
-					sys.puts("Deal ID :: " +doc.id +' - ' + doc.title);
+					// sys.puts("Deal ID :: " +doc.id +' - ' + doc.title);
 					i = doc.id;
 				    deals[i] = { id : doc.id , 
 				    		  price : doc.price,  
@@ -57,7 +58,7 @@ db.open(function(err, db){
 						json = JSON.stringify(clean);
 //						console.log('Citylist JSON :: ' +json);
 						console.log('DealCount :: ' +cfn.objectsize(json)); 
-						var fd = '/root/node/grpwnd/tps/public/json_cache/' +'deals_' +city_id +'.json';
+						var fd = '/root/node/grpwnd/tps/public/json_cache/' +'deals_' +city_id +'_' +d +'.json';
 						
 						fs.writeFile(fd, json, function (err) {
 							if (err){ 

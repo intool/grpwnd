@@ -68,6 +68,9 @@ city =  req.params.city;
 
 app.get('/refresh/:city', function(req, res){
 
+var gdc = require('./crawlie/get_deals_for_city');
+gdc.getdeals(city);
+
   res.header('Cache-Control', 'no-cache');
   res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');	
 
@@ -75,9 +78,6 @@ city =  req.params.city;
   res.render('city', {
     title: city,
   });
-
-var gdc = require('./crawlie/get_deals_for_city');
-gdc.getdeals(city);
 
 });
 

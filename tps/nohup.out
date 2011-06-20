@@ -1,0 +1,288 @@
+Express server listening on port 80
+
+  DB Connected :: [object Object] 
+getdeals called for ::463 - for day:: 171
+DealCount :: 3615
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_463_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::473 - for day:: 171
+DealCount :: 1416
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_473_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::463 - for day:: 171
+DealCount :: 3615
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_463_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::53 - for day:: 171
+DealCount :: 1894
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_53_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::53 - for day:: 171
+DealCount :: 1894
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_53_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::1664 - for day:: 171
+DealCount :: 12368
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_1664_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::1664 - for day:: 171
+DealCount :: 12368
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_1664_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::473 - for day:: 171
+DealCount :: 1416
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_473_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::20 - for day:: 171
+DealCount :: 6258
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_20_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::21 - for day:: 171
+DealCount :: 2110
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_21_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::63 - for day:: 171
+DealCount :: 3885
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_63_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::64 - for day:: 171
+DealCount :: 1746
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_64_171.json
+
+  DB Connected :: [object Object] 
+getdeals called for ::182 - for day:: 171
+DealCount :: 1934
+File saved : /root/node/grpwnd/tps/public/json_cache/deals_182_171.json
+ DB ERROR! :: Error: notConnected 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+(node) warning: possible EventEmitter memory leak detected. 11 listeners added. Use emitter.setMaxListeners() to increase limit.
+Trace: 
+    at [object Object].<anonymous> (events.js:126:17)
+    at [object Object].open (/root/node/grpwnd/node_modules/node-mongodb-native/lib/mongodb/db.js:64:10)
+    at Object.getdeals (/root/node/grpwnd/tps/crawlie/get_deals_for_city.js:25:4)
+    at Router.<anonymous> (/root/node/grpwnd/tps/app-test.js:80:5)
+    at done (/root/node/node_modules/express/lib/router/index.js:250:22)
+    at middleware (/root/node/node_modules/express/lib/router/index.js:244:9)
+    at param (/root/node/node_modules/express/lib/router/index.js:227:11)
+    at param (/root/node/node_modules/express/lib/router/index.js:224:11)
+    at pass (/root/node/node_modules/express/lib/router/index.js:232:6)
+    at Router._dispatch (/root/node/node_modules/express/lib/router/index.js:255:4)
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 
+ DB ERROR! :: connection already opened 

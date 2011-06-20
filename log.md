@@ -263,6 +263,27 @@ To escape the Node server in terminal type: **CTRL + C**
 #####A Few Resources
 [Node Beginner Toutorials](http://nodebeginner.org)
 
+#####[Node V.0.5 causing issues with MongoDB](https://github.com/christkv/node-mongodb-native/issues/249) -> Downgrading to v.0.4.8:
+
+	$ node -v
+	>> v0.5.0-pre
+	$ cd /root/node
+	$ sudo make uninstall
+	>> 'uninstall' finished successfully (0.080s)
+	$ node
+	>> -bash: /usr/local/bin/node: No such file or directory
+	$ cd ..
+	$ rm -rf node
+	$ wget http://nodejs.org/dist/node-v0.4.8.tar.gz
+	$ tar xvfz node-v0.4.8.tar.gz   
+	$ mv node-v0.4.8 node 
+	$ cd node
+	$ ./configure
+	>> 'configure' finished successfully (2.356s)
+	$ make install
+
+	
+
 ####NPM (Node Package Manager)
 
 Run this command in your terminal:
