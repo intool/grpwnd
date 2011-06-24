@@ -52,6 +52,21 @@ if(!city || city == undefined) { var city = 'London'; }
 
 });
 
+app.get('/:country', function(req, res){
+
+  // res.header('Cache-Control', 'no-cache');
+  // res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');	
+
+country =  req.params.country;
+
+res.render('country', { layout: 'country_layout.jade', title: 'Country Overview'});
+  
+// var gdc = require('./crawlie/get_deals_for_city');
+// gdc.getdeals(city);
+
+});
+
+
 app.get('/uk/:city', function(req, res){
 
   res.header('Cache-Control', 'no-cache');
@@ -63,26 +78,24 @@ city =  req.params.city;
     title: city
   });
 
+// var gdc = require('./crawlie/get_deals_for_city');
+// gdc.getdeals(city);
 
 });
 
 app.get('/refresh/:city', function(req, res){
 
 var gdc = require('./crawlie/get_deals_for_city');
+city =  req.params.city;
 gdc.getdeals(city);
 
   res.header('Cache-Control', 'no-cache');
   res.header('Expires', 'Fri, 31 Dec 1998 12:00:00 GMT');	
 
-city =  req.params.city;
-  res.render('city', {
-    title: city,
-  });
+  res.statusCode = 200;
+  res.end();
 
 });
-
-
-
 
 app.listen(80);
 console.log("Express server listening on port %d", app.address().port);

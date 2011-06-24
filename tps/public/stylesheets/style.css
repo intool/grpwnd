@@ -25,15 +25,20 @@ a {
   left: 1px;
   position: fixed;
 }
-div#city-select {
+div#city-select,
+div#country-select {
   color: #fff;
   position: fixed;
   top: 6px;
-  right: 20px;
+  left: 450px;
   font-size: 1.6em;
   font-weight: bold;
 }
-#city-select-box {
+div#country-select {
+  left: 250px;
+}
+#city-select-box,
+#country-select-box {
   background-color: #fff;
   margin-top: 4px;
   padding-left: 4px;
@@ -45,7 +50,11 @@ div#city-select {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-#city-select-label {
+#country-select-box {
+  width: 75px;
+}
+#city-select-label,
+#country-select-label {
   margin-top: -30px;
 }
 #canvas {

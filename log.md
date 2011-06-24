@@ -281,7 +281,7 @@ To escape the Node server in terminal type: **CTRL + C**
 	$ ./configure
 	>> 'configure' finished successfully (2.356s)
 	$ make install
-
+	>> 'install' finished successfully (4m54.681s)
 	
 
 ####NPM (Node Package Manager)
@@ -456,8 +456,9 @@ We can view existing users for the database with the command:
 
 Rock Mongo is the Mongo equivalent for PHPMyAdmin.
 
-Requires 
+Requires [pecl](http://www.mkfoster.com/2009/01/04/how-to-install-a-php-pecl-extensionmodule-on-ubuntu/)
 
+	$ sudo apt-get install php-pear php5-dev build-essential
 	$ sudo pecl install mongo
 	>> pecl/mongo is already installed and is the same as the released version 1.1.4
 
@@ -468,7 +469,11 @@ So apache can read it...
 	$ wget http://rock-php.googlecode.com/files/rockmongo-v1.1.0.zip
 	$ unzip rockmongo-v1.1.0.zip
 
-	
+#####Change Apache Port to 8080 to give nginx/node port 80 :-)
+
+on debian/ubuntu it was easy:
+
+	$ vi /etc/apache2/ports.conf
 
 ####MongoDB NodeJS Modules
 
@@ -626,6 +631,13 @@ To Commit/Push:
 *or* 
 
 	$ git push tpsorigin master
+	
+error?
+
+	Warning: Permanently added 'github.com,207.97.227.239' (RSA) to the list of known hosts.
+	Permission denied (publickey).
+	fatal: The remote end hung up unexpectedly
+
 
 ####[Firewall Ports](http://www.cyberciti.biz/faq/howto-rhel-linux-open-port-using-iptables/)
 
@@ -796,6 +808,8 @@ e.g.
 			});
 		}
 	});
+	
+- [JSON.parse in NodeJS]()
 
 - [How to sort a JSON array ?](http://stackoverflow.com/questions/979256/how-to-sort-a-json-array)
 
@@ -834,8 +848,10 @@ And the code-masters at google wipe away our IE worries! :-)
 
 ###Node JS
 
+
 - Superb [introduction to NodeJS ](http://www.edvanbeinum.com/nodejs-introduction-part-1) by [@edvanbeinum](http://twitter.com/#!/edvanbeinum) -- Highlights >>
-	- 
+	
+- [Now JS](http://www.nowjs.com/) -- the potential to be Awesome!! check the [github page](https://github.com/Flotype/now) 700 watchers! = good sign!
 
 - [MongoDB Advanced Queries](http://www.mongodb.org/display/DOCS/Advanced+Queries) -- Essentially I wanted to write a *SELECT dealid WHERE t > 200* query to get all the items younger than 200 minutes. this was writen: *db.things.find({time: {$gt: 200} });* in mongo. Simpel enough.
 

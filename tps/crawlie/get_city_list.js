@@ -30,6 +30,7 @@ db.open(function(err, db){
 		  // console.log('Cursor :: ' +cursor +'   >>   length :: ' +cursor.length );
 	      cursor.toArray(function(err, docs) {
 			// console.log('   Docs Length :: ' +docs.length +'  -  ' +docs +'\n');
+			db.close();
 			var total = docs.forEach(function(doc) {
 			
 				if(doc.city_name == null) { // doc.city_name in citylist //  || 
@@ -60,44 +61,35 @@ db.open(function(err, db){
 		});	// end writeFile
 		
 		  	      }); // end cursor.toArray
-			process.nextTick(function () {
-				console.log('nextTick Called :-)');
-				db.close();
-			}); // end nextTick
+			// process.nextTick(function () {
+				// console.log('nextTick Called :-)');
+
+			// }); // end nextTick
 	    }); // end collection.find
-		
 	 }); // end collection
   } // end err check
 }); // end .open
 } // end function :-)
 
-
-
 country = 'UK';
 citylist = getcitylist(country);
-
-
-
-
 
 
 // need to work on automating this once the UK is demo'd :-)
 var countries = ["UK","FR","DE","IE"];
 var get = [];
-for (var i = 0; i < countries.length; i++) {
-		country = countries[i];
-		console.log('Countrie :: ' +country);
+// for (country in countries){ //var i = 0; i < countries.length; i++) {
 		
-		// setTimeout(function () {
-			process.nextTick(function () {
-				console.log('nextTick Called :-)');
-				// var list = getcitylist2(country);
-			}); // end nextTick
-		//Do something
+		// country = countries[i];
+		// setTimeout(function (country) {
+			// console.log('Countrie :: ' +country);
+			// var list = getcitylist(country);
+
+		// Do something
 		
 		
-		// }, 3000);
-}
+		 // }, 3000);
+// }
 
    // this removes null values from the city list... :-) >> tell me if you have a better/faster way of doing it!!
 	function cleanArray(actual){

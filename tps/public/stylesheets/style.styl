@@ -27,17 +27,21 @@ a
   left:1px;
   position: fixed;
 
-div#city-select {
+div#city-select, div#country-select {
   color: white
   position:fixed;
   top:6px;
-  right:20px;
+  left:450px;
   // padding-top: 7px
   font-size: 1.6em;
   font-weight: bold;
 }
 
-#city-select-box {
+div#country-select {
+  left:250px;
+}
+
+#city-select-box, #country-select-box {
   background-color: white;
   margin-top: 4px
   padding-left: 4px;
@@ -51,7 +55,11 @@ div#city-select {
    border-radius:4px;
 }
 
-#city-select-label {
+#country-select-box {
+  width: 75px;
+}
+
+#city-select-label, #country-select-label {
   margin-top: -30px;
 }
 
@@ -175,13 +183,9 @@ table.results tr td
   font-size: 1.6em
 
 .col1
- border-right : 2px solid #8BD3F6
- width: 120px
-
-
-
+  border-right : 2px solid #8BD3F6
+  width: 120px
+ 
 .hide
   display:none;
   
-
- 

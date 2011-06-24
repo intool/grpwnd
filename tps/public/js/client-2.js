@@ -32,16 +32,40 @@ $(document).ready(function() {
 		});
 		var c = window.location.pathname.split("/")[2];
 		document.getElementById("city-select-box").value = c;
+		// set document title to city name
+		var cityname = $('#city-select-box').find(':selected').text();
+		document.title = cityname +' -> Stats' ;
+		
 		$('#city-select').fadeIn(300, 'swing');	
 	});
 
 //	var city = window.location.pathname.split("/")[2];
 console.log('We\'ve made it this far... ' +city);
  updatedeals();
-// setTimeout( dealinit(city), 100);	
+setTimeout( function() {
+console.log('Updating Deals...');
+// updatedeals();
+window.location.href=window.location.href;
+}, 60000);	
 
 	
 }); // end doc.ready
+
+function sort_by(field, reverse, primer) {
+	reverse = (reverse) ? -1 : 1;
+	return function(a,b){
+		a = a[field];
+		b = b[field];
+		if (typeof(primer) != 'undefined'){
+			a = primer(a);
+			b = primer(b);
+		}
+		if (a<b) return reverse * -1;
+		if (a>b) return reverse * 1;
+		return 0;
+	}
+} // end sort_by
+
 
 function updatedeals() { 
 	var city = window.location.pathname.split("/")[2];
@@ -61,10 +85,23 @@ function dealinit(city) {
      type: "GET", url: '/json_cache/deals_' + city + '_' +d +'.json',
      success: function (data, text) {
      console.log('Success! > Loading deals from Cache...');
+	 if (data == null) { 
+		console.log('Data is NULL!' +data); 
+		setTimeout( function(){
+			// updatedeals();
+			alert('Sorry, Something went wrong there... please try again in 30 seconds.');
+			window.stop();
+			// document.execCommand('Stop');
+			// window.location.href=window.location.href;
+			window.history.back()
+		}, 2000);
+		return;
+	 }
      var i = 0,
 	 total_s = 0,
 	 total_r = 0;
-				    
+		
+		data.sort(sort_by('r', -1));
 		$.each(data, function(key, val) {
 			$('#deals').append('<div class="deal" id="' + val.id + '">' 		
 

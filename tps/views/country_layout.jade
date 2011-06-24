@@ -1,0 +1,31 @@
+!!!
+html
+	head
+		title= title
+		// link(rel='stylesheet', href='http://static.uk.groupon-content.net/s/v/1615910225/bundles/layout_bundle.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		meta(http-equiv="X-UA-Compatible", content="chrome=1")
+
+	body
+		#header
+			img(src="http://static.uk.groupon-content.net/s/v/cb213166754/images/layout/groupon.png").logo
+			div#city-select.hide
+				label#city-select-label City : 
+				select()#city-select-box
+		#wrapper
+			#canvas!= body
+
+		script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js')
+		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js')
+		script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js')
+		script(type='text/javascript', src='/js/jquery.flot.min.js')
+		script(type='text/javascript')
+			$(document).ready(function() {
+				$.getScript('/js/client-2.js', function() {
+					console.log('client-2.js loaded! game on!');
+					});
+				CFInstall.check({
+					mode: "overlay",
+					destination: window.location
+				});
+			});
