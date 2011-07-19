@@ -853,6 +853,8 @@ And the code-masters at google wipe away our IE worries! :-)
 	
 - [Now JS](http://www.nowjs.com/) -- the potential to be Awesome!! check the [github page](https://github.com/Flotype/now) 700 watchers! = good sign!
 
+###MongoDB
+
 - [MongoDB Advanced Queries](http://www.mongodb.org/display/DOCS/Advanced+Queries) -- Essentially I wanted to write a *SELECT dealid WHERE t > 200* query to get all the items younger than 200 minutes. this was writen: *db.things.find({time: {$gt: 200} });* in mongo. Simpel enough.
 
 - [MongoDB Security & Authentication](http://www.mongodb.org/display/DOCS/Security+and+Authentication) - For obvious reasons, we need to ensure a simple level of security. But as we are sharing our code on GitHub we need to remember to change the passwords in production. :-)
@@ -903,6 +905,22 @@ Run:
    destinct values... but without that facility we need to return the large dataset and 
 
 ###Linux:
+
+- [Cron](http://www.math-linux.com/spip.php?article45) 
+
+	String	                           Action
+	@midnight	execution once a day, "0 0 * * *"
+	@hourly	execution once an hour,   "0 * * * *"
+
+e.g:
+
+#run the city list at midnight and 1 min passed to ensure that we have the city list for the new day:
+0   0 * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/get_city_list3.js 1>/root/city_list.log 2>/root/city_list.error   
+1   0 * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/get_city_list3.js 1>/root/city_list.log 2>/root/city_list.error
+
+
+	0   0 * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/get_city_list3.js 1>/root/city_list.log 2>/root/city_list.error
+	*/1 * * * * /usr/local/bin/node /root/node/grpwnd/tps/crawlie/crawlie3.js 1>/root/crawlie.log 2>/root/crawlie.error
 
 - Check version of Linux from command line:
 
